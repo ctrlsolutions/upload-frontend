@@ -33,3 +33,16 @@ npm run build
 ```sh
 npm run lint
 ```
+
+
+### Naming conventions we use
+
+Css class names: Kebab Case
+    example: this-is-a-class-name
+
+Vue component: Pascal Case
+    example: ThisIsAVueComponent.vue
+
+Folders: Modular
+    example: thisIsAFolder
+    

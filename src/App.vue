@@ -1,15 +1,13 @@
-<script setup>
-
-</script>
-
 <template>
-  <div class="my-class">Hello SCSS!</div>
+  <div class="container">
+    <RouterView />
+  </div>
 </template>
 
-<style lang="scss">
-@import './styles/variables';
+<script setup>
+import { RouterView } from 'vue-router'
+</script>
 
-.my-class {
-  color: $primary-color;
-}
+<style scoped>
+
 </style>

@@ -19,6 +19,7 @@
   --vt-c-text-light-2: rgba(60, 60, 60, 0.66);
   --vt-c-text-dark-1: var(--vt-c-white);
   --vt-c-text-dark-2: rgba(235, 235, 235, 0.64);
+  --background-image-green: url(@assets/backgroundImages/wall.jpeg);
 }
 
 /* semantic color variables for this project */
@@ -59,12 +60,8 @@
 }
 
 body {
-  min-height: 100vh;
-  color: var(--color-text);
+  color: black;
   background: var(--color-background);
-  transition:
-    color 0.5s,
-    background-color 0.5s;
   line-height: 1.6;
   font-family:
     Inter,
@@ -82,5 +79,4 @@ body {
   font-size: 15px;
   text-rendering: optimizeLegibility;
   -webkit-font-smoothing: antialiased;
-  -moz-osx-font-smoothing: grayscale;
 }
