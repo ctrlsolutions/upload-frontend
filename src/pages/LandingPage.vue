@@ -27,7 +27,7 @@ export default {
 </script>
 <style>
 body {
-  background-color: white; /* or #FFFFFF */
+  background-color: rgb(252, 252, 252); /* or #FFFFFF */
 }
 .i {
   display: flex;
