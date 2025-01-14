@@ -1,3 +1,13 @@
+<template>
+  <button
+    :class="['nav-button', variantClass]"
+    @click="navigate"
+    :style="{ width: width, height: height }"
+  >
+    <slot></slot>
+  </button>
+</template>
+
 <script>
 export default {
   props: {
@@ -23,17 +33,20 @@ export default {
       return `nav-button--${this.variant}`
     },
     buttonStyle() {
-      // Ensure dynamic font size is based on button dimensions
       const widthValue = parseFloat(this.width) || 0
       const heightValue = parseFloat(this.height) || 0
 
-      // Calculate font size as a fraction of width and height
       const fontSize = (widthValue + heightValue) / 10
+
+      // Dynamic padding calculations
+      const paddingTopBottom = heightValue / 5 // Padding based on height
+      const paddingLeftRight = widthValue / 10 // Padding based on width
 
       return {
         width: this.width,
         height: this.height,
         fontSize: `${fontSize}px`,
+        padding: `${paddingTopBottom}px ${paddingLeftRight}px`, // Top/Bottom and Left/Right
       }
     },
   },
@@ -49,7 +62,7 @@ export default {
   padding: 13px 54px;
   border-radius: 35px;
   cursor: pointer;
-  text-wrap-mode: nowrap;
+  white-space: nowrap;
 }
 
 /* Variants */
