@@ -1,27 +1,29 @@
 <template>
-  <div class="i">
-    <BaseNavButton route="/login" variant="red-full" width="10px" height="4px"
-      >Log in</BaseNavButton
-    >
-    <BaseNavButton route="/about" variant="green-full"
-      >Placeholder</BaseNavButton
-    >
-    <BaseNavButton route="/profile" variant="red-outline"
-      >Placeholder</BaseNavButton
-    >
-    <BaseNavButton route="/signup" variant="green-outline"
-      >Sign up</BaseNavButton
-    >
-    <BaseNavButton route="/settings" variant="empty">Placeholder</BaseNavButton>
+  <div class="static-page">
+    <div class="scroll-container">
+      <section class="page"><Home></Home></section>
+      <section class="page"><About></About></section>
+      <section class="page"><Summary></Summary></section>
+    </div>
+
+    <div class="background">
+      <img src="@/assets/Oble.png" class="bg-image" />
+    </div>
   </div>
 </template>
 
 <script>
 import BaseNavButton from '@/components/Global/BaseNavButton.vue'
+import Home from '@/components/Landing/Home.vue'
+import About from '@/components/Landing/About.vue'
+import Summary from '@/components/Landing/Summary.vue'
 
 export default {
   components: {
     BaseNavButton,
+    Home,
+    About,
+    Summary,
   },
 }
 </script>
@@ -29,12 +31,41 @@ export default {
 body {
   background-color: white; /* or #FFFFFF */
 }
-.i {
+.static-page {
+  height: 100vh;
+  width: 100vw;
   display: flex;
-  flex: 1;
-  gap: 3px;
   flex-direction: row;
-  height: auto;
+}
+.scroll-container {
+  display: flex;
+  flex-direction: column; /* Arrange children vertically */
+  scroll-snap-type: y mandatory; /* Enable vertical scroll snapping */
+  scroll-snap-points-y: repeat(300px);
+  overflow-y: scroll;
+  width: 50vw;
+  scroll-behavior: smooth; /* Smooth scrolling for snapping */
+  scrollbar-width: none; /* Thin scrollbar for modern browsers */
+}
+.page {
+  background-color: white;
+  scroll-snap-align: start;
+  background-color: transparent;
+  display: flex;
+  height: 100vh;
+}
+.background {
+  z-index: 1;
+  display: flex;
+  justify-content: right;
+  align-items: center;
+  width: 50vw;
+  height: 100vh;
+  pointer-events: auto;
+}
+.bg-image {
   width: auto;
+  height: 100vh;
+  object-fit: contain;
 }
 </style>
