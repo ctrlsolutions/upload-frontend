@@ -24,7 +24,11 @@ const router = createRouter({
       path: '/auth',
       name: 'auth',
       component: AuthPagesLayout,
-      children: [{ path: 'signup', component: SignUpPage }],
+      redirect: '/landing',
+      children: [
+        { path: 'signup', component: SignUpPage },
+        { path: 'login', component: LogInPage },
+      ],
     },
 
     {
@@ -38,13 +42,13 @@ const router = createRouter({
     {
       path: '/signup',
       name: 'signup',
-      component: SignUpPage,
+      redirect: '/auth/signup',
     },
 
     {
       path: '/login',
       name: 'login',
-      component: LogInPage,
+      redirect: '/auth/login',
     },
   ],
 })
