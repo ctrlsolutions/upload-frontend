@@ -49,10 +49,13 @@ export default {
 .form-checkbox {
     display: flex;
     align-items: center;
+    // flex-wrap: nowrap; /* Prevent wrapping */
+    // gap: 0.5rem; /* Add consistent spacing */
     cursor: pointer;
 
     &--circle {
         input[type='checkbox'] {
+            flex-shrink: 0;
             appearance: none;
             width: 1rem; /* Scales well with zoom */
             height: 1rem;
@@ -76,6 +79,7 @@ export default {
         }
 
         label {
+            margin-top: 2rem;
             margin-left: 0.5rem;
             font-weight: bold;
             color: #9e2323;
@@ -83,7 +87,12 @@ export default {
     }
 
     &--square {
+        display: flex;
+        align-items: flex-start;
+        gap:0.5rem;
+
         input[type='checkbox'] {
+            flex-shrink: 0;
             appearance: none;
             width: 1rem;
             height: 1rem;
@@ -91,6 +100,8 @@ export default {
             border-radius: 0.25rem; /* Slightly rounded corners */
             position: relative;
             transition: all 0.3s ease;
+            vertical-align: top; /* Align to the top of the text */
+            margin-top: 2.2rem; /* Adjust the vertical alignment */
         }
 
         input[type='checkbox']:checked {
@@ -100,7 +111,7 @@ export default {
         input[type='checkbox']:checked::after {
             content: '';
             position: absolute;
-            top: 50%;
+            top: 44%;
             left: 50%;
             width: 0.25rem;
             height: 0.5rem;
@@ -110,9 +121,11 @@ export default {
         }
 
         label {
-            margin-left: 0.5rem;
+            margin-top: 2rem;
+            // margin-left: 0.5rem;
             font-weight: bold;
             color: #9e2323;
+            line-height: 1.5; /* Adjust line height for better spacing */
         }
     }
 }

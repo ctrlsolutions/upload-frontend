@@ -14,21 +14,21 @@
       <!-- Circle Checkboxes: Only one can be selected at a time in name1 -->
       <BaseFormCheckbox
         id="terms"
-        label="Choice 1"
+        label="Choice 1: Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum."
         :checked="circleSelected1 === 'terms'"
         @change="selectCircle('terms', 'name1')"
         variant="circle"
       />
       <BaseFormCheckbox
         id="name2"
-        label="Choice 2"
+        label="Choice 2: Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum."
         :checked="circleSelected1 === 'name2'"
         @change="selectCircle('name2', 'name1')"
         variant="circle"
       />
       <BaseFormCheckbox
         id="name3"
-        label="Choice 3"
+        label="Choice 3: Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum."
         :checked="circleSelected1 === 'name3'"
         @change="selectCircle('name3', 'name1')"
         variant="circle"
@@ -40,21 +40,21 @@
       <!-- New Circle Checkboxes: Only one can be selected at a time in name2 -->
       <BaseFormCheckbox
         id="option1"
-        label="New Choice 1"
+        label="New Choice 1:Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum."
         :checked="circleSelected2 === 'option1'"
         @change="selectCircle('option1', 'name2')"
         variant="circle"
       />
       <BaseFormCheckbox
         id="option2"
-        label="New Choice 2"
+        label="new choice 2:Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum."
         :checked="circleSelected2 === 'option2'"
         @change="selectCircle('option2', 'name2')"
         variant="circle"
       />
       <BaseFormCheckbox
         id="option3"
-        label="New Choice 3"
+        label="Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum."
         :checked="circleSelected2 === 'option3'"
         @change="selectCircle('option3', 'name2')"
         variant="circle"
@@ -66,19 +66,19 @@
       <!-- Square Checkbox -->
       <BaseFormCheckbox
         id="square1"
-        label="Square Option 1"
+        label="Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum."
         v-model="squareSelected1"
         variant="square"
       />
       <BaseFormCheckbox
         id="square2"
-        label="Square Option 2"
+        label="Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum."
         v-model="squareSelected2"
         variant="square"
       />
       <BaseFormCheckbox
         id="square3"
-        label="Square Option 3"
+        label="Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum."
         v-model="squareSelected3"
         variant="square"
       />
