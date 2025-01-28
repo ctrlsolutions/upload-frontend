@@ -60,7 +60,7 @@ export default {
             width: 1rem; /* Scales well with zoom */
             height: 1rem;
             cursor: pointer;
-            border: 0.125rem solid #9e2323;
+            border: 0.1rem solid $red;
             border-radius: 50%; /* Circular shape */
             position: relative;
             transition: all 0.3s ease;
@@ -71,9 +71,9 @@ export default {
             position: absolute;
             top: 50%;
             left: 50%;
-            width: 0.5rem;
-            height: 0.5rem;
-            background-color: #c07a7a;
+            width: 0.56rem;
+            height: 0.56rem;
+            background-color: $red;
             border-radius: 50%;
             transform: translate(-50%, -50%);
         }
@@ -96,7 +96,7 @@ export default {
             appearance: none;
             width: 1rem;
             height: 1rem;
-            border: 0.125rem solid #9e2323;
+            border: 0.125rem solid $red;
             border-radius: 0.25rem; /* Slightly rounded corners */
             position: relative;
             transition: all 0.3s ease;
@@ -105,7 +105,7 @@ export default {
         }
 
         input[type='checkbox']:checked {
-            background-color: #9e2323;
+            background-color: $red;
         }
 
         input[type='checkbox']:checked::after {
