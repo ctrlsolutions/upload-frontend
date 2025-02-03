@@ -6,8 +6,6 @@
   <script>
   export default {
     text: String,
-    borderColor: String, // Expecting valid CSS color codes
-    textColor: String,    // Expecting valid CSS color codes
     props: {
       id: {
         type: String,
@@ -52,20 +50,25 @@
     font-family: "Inter", serif;
   
     &--red {
-        border: 3px $red;
-        border-radius: 10px;
+        border: 0.2em $red;
+        border-radius: 1.2em;
         border-style: solid;
         outline: none;
         font-weight: bold;
+        font-size: medium;
         color: $red;
-        padding: 16px;
+        padding: 1.25em;
     }
     
 
     &--green {
-        border: 2px $green;
-        border-radius: 8px;
-        padding: 16px;
+        border: 0.25em $green;
+        border-radius: 1.25em;
+        border-style: solid;
+        outline: none;
+        font-weight: bold;
+        color: $red;
+        padding: 1.5em;
     }
   }
   
