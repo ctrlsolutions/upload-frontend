@@ -1,5 +1,5 @@
 <template>
-      <input type="text"  :class="['input-box',variantClass]" :style="textStyle">
+      <input type="text" placeholder="Placeholder" :class="['input-box',variantClass]" :style="textStyle">
       <slot></slot>
   </template>
   
@@ -70,6 +70,11 @@
         color: $red;
         padding: 1.5em;
     }
+  }
+
+  ::placeholder {
+    color: $red;
+    opacity: 0.7;
   }
   
   </style>
