@@ -3,7 +3,7 @@
         <input
             type="checkbox"
             :id="id"
-            v-model="computedValue"
+            v-model="model"
         />
         <label :for="id">
             <slot>{{ label }}</slot>
@@ -11,40 +11,18 @@
     </div>
 </template>
 
-<script>
-export default {
-    props: {
-        id: {
-            type: String,
-            required: true,
-        },
-        label: {
-            type: String,
-            default: '',
-        },
-        modelValue:{
-            type: Boolean,
-            default: false,
-        },
-        variant: {
-            type: String,
-            default: 'square',
-        },
-    },
-    computed: {
-        computedValue:{
-            get(){
-                return this.modelValue;
-            },
-            set(value){
-                this.$emit("update:modelValue",value);
-            },
-        },
-        variantClass() {
-            return `form-checkbox--${this.variant}`;
-        },
-    },
-};
+<script setup>
+import { defineProps, computed, defineModel } from 'vue';
+
+const props = defineProps({
+    id: String,
+    label: { type: String, default: '' },
+    variant: { type: String, default: 'square' },
+});
+
+const model = defineModel(); 
+
+const variantClass = computed(() => `form-checkbox--${props.variant}`);
 </script>
 
 <style lang="scss" scoped>
