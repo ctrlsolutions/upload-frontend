@@ -28,7 +28,8 @@
   min-height: 57px;
   padding: 19px;
   cursor: pointer;
-  font-family: 800 16px Inter, sans-serif;
+  font-family: "Inter", sans-serif;
+  font-weight: 800;
   color: #fff;
   text-align: center;
 }

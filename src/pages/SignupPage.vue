@@ -1,13 +1,10 @@
 <template>
     <div :class="$style.container">
         <h1>subcomponent</h1>
-        <br>
-        <BaseFormButton />
     </div>
 </template>
 
 <script setup>
-import BaseFormButton from '@/components/Global/BaseFormButton.vue';
 
 </script>
 
