@@ -1,7 +1,6 @@
 <template>
-      <input type="text" placeholder="Placeholder" :class="['input-box',variantClass]" :style="textStyle">
-      <slot></slot>
-  </template>
+      <input type="text" :class="['input-box',variantClass]" :style="textStyle" :placeholder="placeholder">
+</template>
   
   <script>
   export default {
@@ -13,7 +12,7 @@
       },
       placeholder: {
         type: String,
-        default: '',
+        default: 'Placeholder',
       },
       variant: {
         type: String,
@@ -25,18 +24,19 @@
         return `input-box--${this.variant}`
       },
       textStyle() {
-        const styles = {
-            height: this.height,
+        return {
+            '--placeholder-color': this.getVariantColor(this.variant),
+        };
+      },
+    },
+    methods: {
+        getVariantColor(variant) {
+            const colors = {
+                red: '$red',
+                green: '$green'
+            };
+            return colors[variant] || '#000000';
         }
-
-        if (this.width) {
-            styles.width = this.width
-        }
-
-        styles.placeholder = this.placeholder
-
-        return styles
-        },
     }
   }
   </script>
@@ -60,22 +60,21 @@
         padding: 1.25em;
     }
     
-
     &--green {
         border: 0.25em $green;
         border-radius: 1.25em;
         border-style: solid;
         outline: none;
         font-weight: bold;
-        color: $red;
+        color: $green;
         padding: 1.5em;
+    }
+    &::placeholder {
+      color: var(--placeholder-color);
+      opacity: 0.7;
     }
   }
 
-  ::placeholder {
-    color: $red;
-    opacity: 0.7;
-  }
-  
+
   </style>
   
