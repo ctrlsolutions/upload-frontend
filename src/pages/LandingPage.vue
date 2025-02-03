@@ -69,7 +69,7 @@ export default {
       squareSelected1: false, // Do not remove: Needed for testing the checkbox and radio buttons
       squareSelected2: false, // Do not remove: Needed for testing the checkbox and radio buttons
       squareSelected3: false, // Do not remove: Needed for testing the checkbox and radio buttons
-      selectedValue:'', // Do not remove: Needed for testing the checkbox and radio buttons
+      selectedValue:'', 
     };
   },
 };
