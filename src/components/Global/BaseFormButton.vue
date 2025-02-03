@@ -1,57 +1,95 @@
 <template>
   <div class="button-container">
-    <button class="action-button danger-button" tabindex="0">PLACEHOLDER</button>
-    <button class="action-button success-button" tabindex="0">PLACEHOLDER</button>
+    <button class="action-button action-button--danger">PLACEHOLDER</button>
+    <button class="action-button action-button--success">PLACEHOLDER</button>
   </div>
 </template>
 
-<style scoped>
+<script>
+export default {
+  props: {
+    variant: {
+      type: String,
+      default: 'default', // Supports 'danger', 'success'
+    },
+    width: {
+      type: String,
+      default: 'auto',
+    },
+    height: {
+      type: String,
+      default: '3.5rem',
+    },
+  },
+  computed: {
+    variantClass() {
+      return this.variant ? `action-button--${this.variant}` : '';
+    },
+    buttonStyle() {
+      return {
+        width: this.width,
+        height: this.height,
+      };
+    },
+  },
+  methods: {
+    handleClick() {
+      this.$emit('click');
+    },
+  },
+};
+</script>
+
+<style lang="scss" scoped>
+@import '@/styles/variables.scss';
 
 .button-container {
   display: flex;
   flex-direction: column;
   align-items: center;
   justify-content: center;
-  height: 50vh;
-  width: 100%; /* Ensures it takes full width but remains centered */
-  max-width: 450px; /* Prevents it from getting too wide */
-  margin: 0 auto; /* Centers it horizontally */
+  height: 100vh;
+  width: 100%;
 }
 
-/* Button styles */
 .action-button {
-  width: 90%; /* Makes the button responsive within the container */
-  max-width: 391px; /* Prevents excessive stretching */
-  min-width: 200px; /* Ensures it doesn't get too small */
   border: none;
-  border-radius: 15px; /* Consistent rounded corners */
-  min-height: 57px;
-  padding: 19px;
+  border-radius: 1rem;
+  padding: 1.2rem;
   cursor: pointer;
   font-family: "Inter", sans-serif;
   font-weight: 800;
   color: #fff;
   text-align: center;
+  width: 90%;
+  max-width: 24rem;
+  min-width: 12.5rem;
+  min-height: 3.5rem;
+  font-size: 1rem;
+  margin-bottom: 1rem; /* Keeps spacing between buttons */
 }
 
-/* Button colors */
-.danger-button {
+.action-button--danger {
   background-color: rgb(123, 17, 19);
 }
 
-.success-button {
+.action-button--success {
   background-color: rgb(1, 68, 33);
-  margin-top: 18px;
-}
-
-/* Button focus and hover states */
-.action-button:focus {
-  outline: 2px solid #fff;
-  outline-offset: 2px;
+  margin-top: 0.8rem; /* Adjusted for better spacing */
 }
 
 .action-button:hover {
   opacity: 0.9;
 }
 
+.action-button:focus {
+  outline: 0.125rem solid #fff;
+  outline-offset: 0.125rem;
+}
+
+@media (max-width: $screen-md-min) {
+  .action-button {
+    width: 100%;
+  }
+}
 </style>
