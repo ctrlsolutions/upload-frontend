@@ -26,6 +26,10 @@ const model = defineModel();
 const variantClass = computed(() => `form-radio--${props.variant}`);
 </script>
 
+<style lang = "scss">
+@import url('https://fonts.googleapis.com/css2?family=Inter:ital,opsz,wght@0,14..32,100..900;1,14..32,100..900&display=swap');
+</style>
+
 <style lang="scss" scoped>
 * {
     box-sizing: border-box;
@@ -47,6 +51,26 @@ const variantClass = computed(() => `form-radio--${props.variant}`);
         border-radius: 50%;
         position: relative;
         transition: all 0.3s ease;
+
+        @include sm {
+            width: 0.7rem;
+            height: 0.7rem;
+        }
+
+        @include md {
+            width: 0.8rem;
+            height: 0.8rem;
+        }
+
+        @include lg {
+            width: 1.0rem;
+            height: 1.0rem;
+        }
+
+        @include xl {
+            width: 1.2rem;
+            height: 1.2rem;
+        }
     }
 
     input[type='radio']:checked::before {
@@ -59,13 +83,35 @@ const variantClass = computed(() => `form-radio--${props.variant}`);
         background-color: $red;
         border-radius: 50%;
         transform: translate(-50%, -50%);
+
+        @include sm {
+            width: 0.4rem;
+            height: 0.4rem;
+        }
+
+        @include md {
+            width: 0.5rem;
+            height: 0.5rem;
+        }
+
+        @include lg {
+            width: 0.6rem;
+            height: 0.6rem;
+        }
+
+        @include xl {
+            width: 0.8rem;
+            height: 0.8rem;
+        }
     }
 
     label {
-        margin-top: 2rem;
+        margin-top: 0.1rem;
         margin-left: 0.5rem;
         font-weight: bold;
         color: #9e2323;
+        font-family: 'Inter', sans-serif; 
+        // font-family: Times New Roman, serif 
     }
 }
 </style>

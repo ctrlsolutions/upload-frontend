@@ -25,6 +25,10 @@ const model = defineModel();
 const variantClass = computed(() => `form-checkbox--${props.variant}`);
 </script>
 
+<style lang = "scss">
+@import url('https://fonts.googleapis.com/css2?family=Inter:ital,opsz,wght@0,14..32,100..900;1,14..32,100..900&display=swap');
+</style>
+
 <style lang="scss" scoped>
 * {
     box-sizing: border-box;
@@ -50,6 +54,26 @@ const variantClass = computed(() => `form-checkbox--${props.variant}`);
         transition: all 0.3s ease;
         vertical-align: top;
         margin-top: 2.2rem; 
+
+        @include sm {
+            width: 0.9rem;
+            height: 0.9rem;
+        }
+
+        @include md {
+            width: 1rem;
+            height: 1rem;
+        }
+
+        @include lg {
+            width: 1.1rem;
+            height: 1.1rem;
+        }
+
+        @include xl {
+            width: 1.2rem;
+            height: 1.2rem;
+        }
     }
 
     input[type='checkbox']:checked {
@@ -66,6 +90,28 @@ const variantClass = computed(() => `form-checkbox--${props.variant}`);
         border: solid white;
         border-width: 0 0.125rem 0.125rem 0;
         transform: translate(-50%, -50%) rotate(45deg);
+
+        
+        @include sm {
+            width: 0.23rem;
+            height: 0.45rem;
+        }
+
+        @include md {
+            width: 0.25rem;
+            height: 0.50rem;
+        }
+
+        @include lg {
+            width: 0.3rem;
+            height: 0.60rem;
+        }
+
+        @include xl {
+            width: 0.30rem;
+            height: 0.75rem;
+        }
+
     }
 
     label {
@@ -73,6 +119,24 @@ const variantClass = computed(() => `form-checkbox--${props.variant}`);
         font-weight: bold;
         color: #9e2323;
         line-height: 1.5; 
+        font-family: 'Inter', sans-serif; 
+
+        @include sm {
+            font-size: 0.7 rem;
+        }
+
+        @include md {
+            font-size: 0.8rem;
+        }
+
+        @include lg {
+            font-size: 0.9rem;
+        }
+
+        @include xl {
+            font-size: 1rem;
+        }
+
     }
 }
 </style>
