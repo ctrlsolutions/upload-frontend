@@ -17,6 +17,9 @@ export default {
 </script>
 
 <style lang="scss">
+@use '../styles/_mixins' as mixins; 
+
+
 .about-container {
   display: flex;           
   flex-direction: column; 
@@ -28,13 +31,44 @@ export default {
   max-width: 56.25rem;
   margin: 0 auto; 
   padding: 30px; 
-  gap: px; /* Adds spacing between elements */
+  gap: 10px; 
+
+  //BREAKPOINTS
+
+  @include mixins.sm {
+    max-width: 90%;
+    padding: 20px; 
+  }
+
+  @include mixins.md {
+    max-width: 70%;
+  }
+
+  @include mixins.lg {
+    max-width: 56.25rem;
+  }
+
 }
 
-.about-text {
+.about-content {
   font-size: 1.2rem;
   line-height: 1.6;
   color: #333;
+
+  //BREAKPOINTS
+
+  @include mixins.sm {
+    font-size: 1rem;
+    line-height: 1.4;
+  }
+
+  @include mixins.md {
+    font-size: 1.1rem;
+  }
+
+  @include mixins.lg {
+    font-size: 1.2rem;
+  }
 }
 
 .title {
@@ -42,6 +76,21 @@ export default {
   font-weight: 900;
   color: maroon;
   margin-bottom: 5px; 
+
+  //BREAKPOINTS
+
+   @include mixins.sm {
+    font-size: 2rem;
+  }
+
+  @include mixins.md {
+    font-size: 2.5rem;
+  }
+
+  @include mixins.lg {
+    font-size: 3rem;
+  }
+
 }
 
 
