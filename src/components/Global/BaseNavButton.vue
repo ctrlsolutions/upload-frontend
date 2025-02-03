@@ -2,7 +2,7 @@
   <button
     :class="['nav-button', variantClass]"
     @click="navigate"
-    :style="{ width: width, height: height }"
+    :style="buttonStyle"
   >
     <slot></slot>
   </button>
@@ -21,7 +21,7 @@ export default {
     },
     width: {
       type: String,
-      default: 'auto',
+      default: 'null',
     },
     height: {
       type: String,
@@ -33,21 +33,15 @@ export default {
       return `nav-button--${this.variant}`
     },
     buttonStyle() {
-      const widthValue = parseFloat(this.width) || 0
-      const heightValue = parseFloat(this.height) || 0
-
-      const fontSize = (widthValue + heightValue) / 10
-
-      // Dynamic padding calculations
-      const paddingTopBottom = heightValue / 5 // Padding based on height
-      const paddingLeftRight = widthValue / 10 // Padding based on width
-
-      return {
-        width: this.width,
+      const styles = {
         height: this.height,
-        fontSize: `${fontSize}px`,
-        padding: `${paddingTopBottom}px ${paddingLeftRight}px`, // Top/Bottom and Left/Right
       }
+
+      if (this.width) {
+        styles.width = this.width
+      }
+
+      return styles
     },
   },
   methods: {
@@ -57,47 +51,60 @@ export default {
   },
 }
 </script>
+
 <style lang="scss" scoped>
 .nav-button {
-  padding: 13px 54px;
+  font-family: 'Inter', serif;
+  display: flex;
   border-radius: 35px;
   cursor: pointer;
   white-space: nowrap;
+  font-weight: 800;
+  justify-content: center;
+  @include sm {
+    width: 5rem;
+    padding: 0.2rem 1.3rem;
+    font-size: 0.8em;
+  }
+  @include md {
+    width: 7rem;
+    padding: 0.3rem 1.5rem;
+    font-size: 1em;
+  }
+  @include lg {
+    width: 9rem;
+    padding: 0.15rem 2rem;
+    font-size: 1.3em;
+  }
 }
 
-/* Variants */
 .nav-button--red-full {
   background-color: $red;
   color: white;
-  font-weight: bolder;
-  border: 4px solid $red;
+  border: 0.2rem solid $red;
 }
 
 .nav-button--green-full {
   background-color: $green;
   color: white;
-  font-weight: bolder;
-  border: 4px solid $green;
+  border: 0.2rem solid $green;
 }
 
 .nav-button--red-outline {
   background-color: white;
   color: $red;
-  font-weight: bolder;
-  border: 4px solid $red;
+  border: 0.2rem solid $red;
 }
 
 .nav-button--green-outline {
   background-color: white;
   color: $green;
-  font-weight: bolder;
-  border: 4px solid $green;
+  border: 0.2rem solid $green;
 }
 
 .nav-button--empty {
   background-color: transparent;
   color: #1e1e1e;
   border: none;
-  font-weight: bolder;
 }
 </style>
