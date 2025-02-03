@@ -1,18 +1,21 @@
 <template>
   <div class="form-dropdown" :class="variantClass">
-    <div class="form-dropdown__wrapper" @click="toggleDropdown">
-      <input type="text" readonly :id="id" v-model="model" class="form-dropdown__input" :placeholder="placeholder"/>
-      <div class="form-dropdown__separator">
-        <div class="form-dropdown__line"></div>
-        <FontAwesomeIcon :icon="faChevronDown" class="form-dropdown__arrow"/>
-      </div>
+  <input type="hidden" :id="id" v-model="model" />
+  <div class="form-dropdown__wrapper" @click="toggleDropdown" role="combobox" aria-expanded="isOpen">
+    <div class="form-dropdown__input">
+      {{ model || placeholder }}
     </div>
-    <div v-if="isOpen" class="form-dropdown__list">
-      <div v-for="option in options" :key="option" class="form-dropdown__item" @click="selectOption(option)" :class="{ 'form-dropdown__item--selected': option === model }">
-        {{ option }}
-      </div>
+    <div class="form-dropdown__separator">
+      <div class="form-dropdown__line"></div>
+      <FontAwesomeIcon :icon="faChevronDown" class="form-dropdown__arrow" />
     </div>
   </div>
+  <div v-if="isOpen" class="form-dropdown__list">
+    <div v-for="option in options" :key="option" class="form-dropdown__item" @click="selectOption(option)" :class="{ 'form-dropdown__item--selected': option === model }">
+      {{ option }}
+    </div>
+  </div>
+</div>
 </template>
 
 <script setup>
