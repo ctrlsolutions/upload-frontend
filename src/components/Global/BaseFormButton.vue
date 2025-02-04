@@ -10,7 +10,7 @@ export default {
   props: {
     variant: {
       type: String,
-      default: 'default', // Supports 'danger', 'success'
+      default: 'default',
     },
     width: {
       type: String,
@@ -66,16 +66,16 @@ export default {
   min-width: 12.5rem;
   min-height: 3.5rem;
   font-size: 1rem;
-  margin-bottom: 1rem; /* Keeps spacing between buttons */
+  margin-bottom: 1rem;
 }
 
 .action-button--danger {
-  background-color: rgb(123, 17, 19);
+  background-color: $red;
 }
 
 .action-button--success {
-  background-color: rgb(1, 68, 33);
-  margin-top: 0.8rem; /* Adjusted for better spacing */
+  background-color: $green;
+  margin-top: 0.8rem;
 }
 
 .action-button:hover {
