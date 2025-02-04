@@ -1,5 +1,9 @@
 <template>
-      <input type="text" :class="['input-box',variantClass]" :style="textStyle" :placeholder="placeholder">
+      <input 
+      :type="type" 
+      :class="['input-box',variantClass]" 
+      :style="textStyle" 
+      :placeholder="placeholder">
 </template>
   
   <script>
@@ -9,6 +13,10 @@
       id: {
         type: String,
         required: true,
+      },
+      type: {
+        type: String,
+        default: 'text',
       },
       placeholder: {
         type: String,
