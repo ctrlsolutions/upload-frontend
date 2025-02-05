@@ -1,7 +1,12 @@
 <template>
   <div class="button-container">
-    <button class="action-button action-button--danger">PLACEHOLDER</button>
-    <button class="action-button action-button--success">PLACEHOLDER</button>
+    <button
+      :class="['form-button form-button--red', variantClass]"
+      @click="buttonStyle"
+      :style="handleClick"
+    >
+      <slot>PLACEHOLDER</slot>
+    </button>
   </div>
 </template>
 
@@ -23,7 +28,7 @@ export default {
   },
   computed: {
     variantClass() {
-      return this.variant ? `action-button--${this.variant}` : '';
+      return this.variant ? `form-button--${this.variant}` : '';
     },
     buttonStyle() {
       return {
@@ -52,7 +57,7 @@ export default {
   width: 100%;
 }
 
-.action-button {
+.form-button {
   border: none;
   border-radius: 1rem;
   padding: 1.2rem;
@@ -69,26 +74,31 @@ export default {
   margin-bottom: 1rem;
 }
 
-.action-button--danger {
+.form-button--red {
   background-color: $red;
 }
 
-.action-button--success {
+.form-button--green {
   background-color: $green;
   margin-top: 0.8rem;
 }
 
-.action-button:hover {
+.form-button--black {
+  background-color: $black;
+  margin-top: 0.8rem;
+}
+
+.form-button:hover {
   opacity: 0.9;
 }
 
-.action-button:focus {
+.form-button:focus {
   outline: 0.125rem solid #fff;
   outline-offset: 0.125rem;
 }
 
 @media (max-width: $screen-md-min) {
-  .action-button {
+  .form-button {
     width: 100%;
   }
 }
