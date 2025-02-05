@@ -5,7 +5,6 @@
       Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. 
       Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.
       Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.
-      
     </p>
   </div>
 </template>
@@ -17,37 +16,32 @@ export default {
 </script>
 
 <style lang="scss">
-@use '../styles/_mixins' as mixins; 
-
 
 .about-container {
   display: flex;           
   flex-direction: column; 
-  align-items: left;      
-  justify-content: left; 
+  align-items: flex-start;      
+  justify-content: flex-start; 
   text-align: left;
   font-weight: 900;
   font-family: 'Inter', serif;
-  max-width: 56.25rem;
-  margin: 0 auto; 
+  max-width: 100%;
   padding: 30px; 
   gap: 10px; 
 
   //BREAKPOINTS
-
-  @include mixins.sm {
+  @include sm {
     max-width: 90%;
-    padding: 20px; 
+    padding: 30px; 
   }
 
-  @include mixins.md {
+  @include md {
     max-width: 70%;
   }
 
-  @include mixins.lg {
+  @include lg {
     max-width: 56.25rem;
   }
-
 }
 
 .about-content {
@@ -56,17 +50,16 @@ export default {
   color: #333;
 
   //BREAKPOINTS
-
-  @include mixins.sm {
+  @include sm {
     font-size: 1rem;
     line-height: 1.4;
   }
 
-  @include mixins.md {
+  @include md {
     font-size: 1.1rem;
   }
 
-  @include mixins.lg {
+  @include lg {
     font-size: 1.2rem;
   }
 }
@@ -78,21 +71,16 @@ export default {
   margin-bottom: 5px; 
 
   //BREAKPOINTS
-
-   @include mixins.sm {
+  @include sm {
     font-size: 2rem;
   }
 
-  @include mixins.md {
+  @include md {
     font-size: 2.5rem;
   }
 
-  @include mixins.lg {
+  @include lg {
     font-size: 3rem;
   }
-
 }
-
-
-
 </style>
