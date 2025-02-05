@@ -1,11 +1,11 @@
 <template>
   <div class="button-container">
     <button
-      :class="['form-button form-button--red', variantClass]"
+      :class="['form-button', variantClass]"
       @click="buttonStyle"
       :style="handleClick"
     >
-      <slot>PLACEHOLDER</slot>
+      PLACEHOLDER
     </button>
   </div>
 </template>
