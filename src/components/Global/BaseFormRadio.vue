@@ -26,10 +26,6 @@ const model = defineModel();
 const variantClass = computed(() => `form-radio--${props.variant}`);
 </script>
 
-<style lang = "scss">
-@import url('https://fonts.googleapis.com/css2?family=Inter:ital,opsz,wght@0,14..32,100..900;1,14..32,100..900&display=swap');
-</style>
-
 <style lang="scss" scoped>
 * {
     box-sizing: border-box;
