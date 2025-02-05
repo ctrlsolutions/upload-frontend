@@ -1,7 +1,7 @@
 <template>
   <div :class="$style.container">
       <h1>subcomponent</h1>
-        <BaseFormButton/>
+        <BaseFormButton>PLACEHOLDER</BaseFormButton>
   </div>
 </template>
 

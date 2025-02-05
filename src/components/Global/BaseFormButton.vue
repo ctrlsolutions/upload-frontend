@@ -2,10 +2,10 @@
   <div class="button-container">
     <button
       :class="['form-button', variantClass]"
-      @click="buttonStyle"
-      :style="handleClick"
+      @click="handleClick"
+      :style="buttonStyle"
     >
-      PLACEHOLDER
+    <slot></slot>
     </button>
   </div>
 </template>
