@@ -46,7 +46,6 @@ export default {
 </script>
 
 <style lang="scss" scoped>
-
 .button-container {
   display: flex;
   flex-direction: column;
@@ -65,12 +64,28 @@ export default {
   font-weight: 800;
   color: #fff;
   text-align: center;
-  width: 90%;
+  width: 24rem;
   max-width: 24rem;
   min-width: 12.5rem;
   min-height: 3.5rem;
   font-size: 1rem;
   margin-bottom: 1rem;
+
+  @include sm {
+    width: 20rem;
+  }
+
+  @include md {
+    width: 22rem;
+  }
+
+  @include lg {
+    width: 23rem;
+  }
+
+  @include xl {
+    width: 24rem;
+  }
 }
 
 .form-button--red {
@@ -94,11 +109,5 @@ export default {
 .form-button:focus {
   outline: 0.125rem solid #fff;
   outline-offset: 0.125rem;
-}
-
-@media (max-width: $screen-md-min) {
-  .form-button {
-    width: 100%;
-  }
 }
 </style>
