@@ -1,9 +1,12 @@
 <template>
       <input 
+      :id="id"
       :type="type" 
       :class="['input-box',variantClass]" 
       :style="textStyle" 
-      :placeholder="placeholder">
+      :placeholder="placeholder"
+      v-bind="$attrs"
+      />
 </template>
   
   <script>
@@ -16,7 +19,7 @@
       },
       type: {
         type: String,
-        default: 'text',
+        default: 'text', //supports text, email, tel, password, etc na daw
       },
       placeholder: {
         type: String,
@@ -24,7 +27,7 @@
       },
       variant: {
         type: String,
-        default: 'red', // Default to circular variant
+        default: 'red',
       },
     },
     computed: {
@@ -82,7 +85,6 @@
       opacity: 0.7;
     }
   }
-
-
+  
   </style>
   
