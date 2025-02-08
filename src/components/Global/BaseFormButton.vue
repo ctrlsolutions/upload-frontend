@@ -15,15 +15,15 @@ export default {
   props: {
     variant: {
       type: String,
-      default: 'default',
+      default: 'empty',
     },
     width: {
       type: String,
-      default: '',
+      default: 'null',
     },
     height: {
       type: String,
-      default: '',
+      default: 'auto',
     },
   },
   computed: {
@@ -39,7 +39,7 @@ export default {
   },
   methods: {
     handleClick() {
-      this.$emit('click');
+      this.defineEmit('click');
     },
   },
 };
