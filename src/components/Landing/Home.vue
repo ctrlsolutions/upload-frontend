@@ -31,6 +31,12 @@ export default {
 </script>
 
 <style lang="scss" scoped>
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;700&display=swap');
+
+* {
+  font-family: 'Inter', serif;
+}
+
 .header-logos {
   display: flex;
 }
@@ -43,40 +49,40 @@ export default {
   overflow-y: scroll;
   scroll-behavior: smooth;
   scrollbar-width: none;
-  padding: 25px 0px 150px 50px;
-  gap: 20px;
+  padding: 1.5625rem 0 9.375rem 3.125rem;
+  gap: 1.25rem;
 }
 .title {
   font-weight: 800;
   color: $red;
   font-size: 2.5rem;
-  max-width: 340px;
+  max-width: 21.25rem;
   line-height: 2.8rem;
 }
 .subtitle {
-  font-size: medium;
+  font-size: 1rem;
 }
 .header-logos {
   align-self: center;
   display: flex;
-  width: 499px;
+  width: 31.1875rem;
   max-width: 100%;
   align-items: start;
-  margin-bottom: 50px;
+  margin-bottom: 3.125rem;
 }
 .UPlogo {
-  object-fit:contain;
+  object-fit: contain;
   width: 15%;
-  row-gap: 2px;
+  row-gap: 0.125rem;
 }
 .UPloadlogo {
-  object-fit:contain;
+  object-fit: contain;
   width: 18%;
 }
 .buttons {
   display: flex;
   flex-direction: row;
-  gap: 10px;
-  margin-top: 30px;
+  gap: 0.625rem;
+  margin-top: 1.875rem;
 }
 </style>
