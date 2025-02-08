@@ -17,24 +17,10 @@ export default {
       type: String,
       default: 'default',
     },
-    width: {
-      type: String,
-      default: 'auto',
-    },
-    height: {
-      type: String,
-      default: '3.5rem',
-    },
   },
   computed: {
     variantClass() {
       return this.variant ? `form-button--${this.variant}` : '';
-    },
-    buttonStyle() {
-      return {
-        width: this.width,
-        height: this.height,
-      };
     },
   },
   methods: {
@@ -45,15 +31,7 @@ export default {
 };
 </script>
 
-<style lang="scss" scoped>
-.button-container {
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  justify-content: center;
-  height: 100vh;
-  width: 100%;
-}
+<style lang="scss">
 
 .form-button {
   border: none;
@@ -64,27 +42,34 @@ export default {
   font-weight: 800;
   color: #fff;
   text-align: center;
-  width: 24rem;
-  max-width: 24rem;
-  min-width: 12.5rem;
-  min-height: 3.5rem;
   font-size: 1rem;
   margin-bottom: 1rem;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  transition: all 0.3s ease;
+
+  width: 12rem;
+  height: 1rem;
 
   @include sm {
-    width: 20rem;
+    width: 8rem;
+    height: 2rem;
   }
 
   @include md {
-    width: 22rem;
+    width: 10rem;
+    height: 2.5rem;
   }
 
   @include lg {
-    width: 23rem;
+    width: 15rem;
+    height: 3rem;
   }
 
   @include xl {
-    width: 24rem;
+    width: 16rem;
+    height: 3.5rem;
   }
 }
 
