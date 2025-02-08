@@ -3,7 +3,7 @@
       :id="id"
       :type="type" 
       :class="['input-box',variantClass]" 
-      :style="textStyle" 
+      :style="{ '--input-width': width, '--input-height': height}" 
       :placeholder="placeholder"
       v-bind="$attrs"
       />
@@ -19,7 +19,7 @@
       },
       type: {
         type: String,
-        default: 'text', //supports text, email, tel, password, etc na daw
+        default: 'text',
       },
       placeholder: {
         type: String,
@@ -28,6 +28,14 @@
       variant: {
         type: String,
         default: 'red',
+      },
+      width: {
+        type: String,
+        default: '100%',
+      },
+      height: {
+        type:String,
+        default: '100%',
       },
     },
     computed: {
@@ -40,7 +48,8 @@
   
   <style lang="scss" scoped>
   .input-box {
-    width: 100%;
+    width: var(--input-width);
+    height: var(--input-height);
     padding: 16px;
     border: 2px solid;
     border-radius: 12px;
