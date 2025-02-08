@@ -5,7 +5,7 @@
       @click="handleClick"
       :style="buttonStyle"
     >
-    <slot></slot>
+      <slot></slot>
     </button>
   </div>
 </template>
@@ -17,22 +17,35 @@ export default {
       type: String,
       default: 'default',
     },
+    width: {
+      type: String,
+      default: '',
+    },
+    height: {
+      type: String,
+      default: '',
+    },
   },
   computed: {
     variantClass() {
       return this.variant ? `form-button--${this.variant}` : '';
     },
+    buttonStyle() {
+      return {
+        width: this.width,
+        height: this.height,
+      };
+    },
   },
   methods: {
     handleClick() {
-      this.defineEmit('click');
+      this.$emit('click');
     },
   },
 };
 </script>
 
 <style lang="scss">
-
 .form-button {
   border: none;
   border-radius: 1rem;

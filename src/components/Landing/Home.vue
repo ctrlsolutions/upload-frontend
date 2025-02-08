@@ -22,6 +22,7 @@
 <script>
 import BaseNavButton from '@/components/Global/BaseNavButton.vue'
 export default {
+  name: 'HomePage',
   components: {
     BaseNavButton,
   },
