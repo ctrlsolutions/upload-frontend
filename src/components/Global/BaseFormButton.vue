@@ -13,6 +13,10 @@
 <script>
 export default {
   props: {
+    route: {
+      type: String,
+      required: true,
+    },
     variant: {
       type: String,
       default: 'empty',
@@ -31,10 +35,15 @@ export default {
       return this.variant ? `form-button--${this.variant}` : '';
     },
     buttonStyle() {
-      return {
-        width: this.width,
+      const styles = {
         height: this.height,
-      };
+      }
+
+      if (this.width) {
+        styles.width = this.width
+      }
+
+      return styles
     },
   },
   methods: {
@@ -48,7 +57,7 @@ export default {
 <style lang="scss">
 .form-button {
   border: none;
-  border-radius: 1rem;
+  border-radius: 0.8rem;
   padding: 1.2rem;
   cursor: pointer;
   font-family: "Inter", sans-serif;
@@ -62,22 +71,19 @@ export default {
   align-items: center;
   transition: all 0.3s ease;
 
-  width: 12rem;
-  height: 1rem;
-
   @include sm {
     width: 8rem;
-    height: 2rem;
+    height: 0.5rem;
   }
 
   @include md {
     width: 10rem;
-    height: 2.5rem;
+    height: 1rem;
   }
 
   @include lg {
     width: 15rem;
-    height: 3rem;
+    height: 2rem;
   }
 
   @include xl {
