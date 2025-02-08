@@ -1,62 +1,165 @@
+
 <template>
-    <div :class="[$style.container, backgroundStyle ? $style['red-bg'] : $style['blue-bg']]">
+    <div :class="[$style.container, isSignupRoute ? $style['red-bg'] : $style['green-bg']]">
         <main :class="$style['content-container']">
-            <img src="../assets/backgroundImages/oble_closeup.png" :class="$style.img">
+            <div :class="$style.imageContainer">
+                <div :class="$style.header">
+                    <div :class="$style.logoContainer">
+                        <img src="../assets/UPLogo.svg" :class="$style.logo">
+                        <img src="../assets/UPloadLogo.svg" :class="$style.logo">
+                    </div>
+                    <div :class="$style.buttonContainer">
+                        <router-link 
+                            to="/auth/signup" 
+                            :class="{ [$style.signupButton]: true, [$style.signupButtonActive]: isSignupRoute }">
+                            Signup
+                        </router-link>
+                        <router-link 
+                            to="/auth/login" 
+                            :class="{ [$style.loginButton]: true, [$style.loginButtonActive]: !isSignupRoute }">
+                            Login
+                        </router-link>
+                    </div>
+                </div>
+                <img src="../assets/backgroundImages/oble_closeup.png" :class="$style.img">
+            </div>    
             <RouterView></RouterView>
         </main>
     </div>
 </template>
 
 <script setup>
-import { computed } from 'vue';
-import { useRoute } from 'vue-router';
+    import { computed } from 'vue';
+    import { useRoute } from 'vue-router';
+
+    const route = useRoute();
+
+    const isSignupRoute = computed(() => route.path === '/auth/signup');
+
+    const signupButtonClass = computed(() => {
+    return [
+        $style.signupButton,
+        isSignupRoute.value ? $style['signupButtonActive'] : '',
+    ];
+    });
+
+    const loginButtonClass = computed(() => {
+    return [
+        $style.loginButton,
+        !isSignupRoute.value ? $style['loginButtonActive'] : '',
+    ];
+    });
 
 
-const route = useRoute();
-
-const backgroundStyle = computed(() => {
-    const segments = route.path.split('/');
-    const lastSegment = segments[segments.length - 1];
-
-    // Return just the class name as a string
-    if (lastSegment === 'signup') return true;
-    return false;
-});
+    console.log(route.path)
+    console.log('isSignupRoute', isSignupRoute.value)
 </script>
 
 <style module>
-.container {
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    width: 100vw;
-    height: 100vh;
-}
+    .container {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        width: 100vw;
+        height: 100vh;
+    }
 
-.content-container {
-    display: flex;
-    justify-content: space-around;
-    align-items: center;
+    .content-container {
+        display: flex;
+        justify-content: space-around;
+        align-items: center;
+        
+        width: 80%;
+        height: 90%;
+        background-color: white;
+        border-radius: 40px;
+    }
 
-    width: 80%;
-    height: 90%;
-    background-color: white;
-    border-radius: 40px;
-}
+    .imageContainer {
+        position: relative;
+        display: flex;
+        align-items: center;
+        height: 98%;
+    }
 
-.red-bg {
-    background-image: url('../assets/backgroundImages/bg_red.png');
+    .header {
+        position: absolute;
+        top: 20px;
+        left: 15px;
+        display: flex;
+        justify-content: space-between;
+        width: 94%;
+    }
 
-}
+    .logoContainer {
+        display: flex;
+        align-items: center;
+    }
 
-.blue-bg {
-    background-image: url('../assets/backgroundImages/bg_green.png');
+    .logo {
+        height: 50px;
+        width: auto;
+    }
 
-}
+    .buttonContainer {
+        display: flex;
+        align-items: center;
+        gap: 5px;
+    }
 
-.img {
-    height: 98%;
+    .signupButton {
+        background: none;
+        border: none;
+        font-size: 18px;
+        font-weight: bold;
+        cursor: pointer;
+        padding: 8px 20px;
+        color: black;
+    }
 
-    border-radius: 36px;
-}
+    .loginButton {
+        border: none;
+        font-size: 18px;
+        font-weight: bold;
+        padding: 8px 20px;
+        cursor: pointer;
+        color: black;
+    }
+    
+    .signupButtonActive {
+        background-color: #4d0000;
+        color: white;
+        border-radius: 20px;
+        padding: 8px 20px;
+    }
+
+    .loginButtonActive {
+        background-color: #004d38;
+        color: white;
+        border-radius: 20px;
+        padding: 8px 20px;
+    }
+
+    .red-bg {
+        background-image: url('../assets/backgroundImages/BG Photo.png');
+        background-blend-mode: multiply;
+        background-size: 140%;
+        background-position: center;
+        background-repeat: no-repeat;
+        background-color: rgb(116, 0, 23);
+    }
+
+    .green-bg {
+        background-image: url('../assets/backgroundImages/BG Photo.png');
+        background-blend-mode: multiply;
+        background-size: 140%;
+        background-position: center;
+        background-repeat: no-repeat;
+        background-color: rgb(6, 78, 0);
+    }
+
+    .img {
+        height: 98%;
+        border-radius: 36px;
+    }
 </style>
