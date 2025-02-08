@@ -14,6 +14,7 @@
 </template>
 
 <script>
+import BaseFormButton from '@/components/Global/BaseFormButton.vue';
 import BaseNavButton from '@/components/Global/BaseNavButton.vue';
 import BaseFormCheckbox from '@/components/Global/BaseFormCheckbox.vue';
 import BaseFormRadio from '@/components/Global/BaseFormRadio.vue';
@@ -23,6 +24,7 @@ import Summary from '@/components/Landing/Summary.vue'
 
 export default {
   components: {
+    BaseFormButton,
     BaseNavButton,
     BaseFormCheckbox,
     BaseFormRadio,
@@ -35,7 +37,7 @@ export default {
       squareSelected1: false, // Do not remove: Needed for testing the checkbox and radio buttons
       squareSelected2: false, // Do not remove: Needed for testing the checkbox and radio buttons
       squareSelected3: false, // Do not remove: Needed for testing the checkbox and radio buttons
-      selectedValue:'', 
+      selectedValue:'',
     };
   },
 };
@@ -54,12 +56,12 @@ body {
 .scroll-container {
   display: flex;
   flex-direction: column;
-  scroll-snap-type: y mandatory; 
+  scroll-snap-type: y mandatory;
   scroll-snap-points-y: repeat(300px);
   overflow-y: scroll;
   width: 50vw;
-  scroll-behavior: smooth; 
-  scrollbar-width: none; 
+  scroll-behavior: smooth;
+  scrollbar-width: none;
 }
 .page {
   background-color: white;
