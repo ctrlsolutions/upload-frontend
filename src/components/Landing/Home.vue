@@ -1,7 +1,8 @@
 <template>
-  <div class="container space-y-4">
+  <div class="container">
     <div class="header-logos">
-      <img class="logo" src="@/assets/UP-logo.svg" />
+      <img class="UPlogo" src="@/assets/UP-logo.svg" />
+      <img class="UPloadlogo" src="@/assets/UPloadLogo.svg" />
     </div>
     <div class="title">
       THE OFFICIAL REPORT OF ACCOMPLISHMENT SUBMISSION PLATFORM FOR THE UP CEBU
@@ -38,37 +39,44 @@ export default {
   display: flex;
   flex-direction: column;
   justify-content: center;
-  align-items: flex-start;
   min-height: 100vh;
   overflow-y: scroll;
   scroll-behavior: smooth;
   scrollbar-width: none;
-  padding: 25px;
-  gap: 14px;
-  text-align: left;
+  padding: 25px 0px 150px 50px;
+  gap: 20px;
 }
 .title {
   font-weight: 800;
   color: $red;
-  font-size: 2rem;
-  max-width: 320px;
-  line-height: 2.5rem;
+  font-size: 2.5rem;
+  max-width: 340px;
+  line-height: 2.8rem;
 }
 .subtitle {
-  font-size: small;
+  font-size: medium;
 }
 .header-logos {
+  align-self: center;
   display: flex;
-  flex-direction: row;
+  width: 499px;
+  max-width: 100%;
+  align-items: start;
+  margin-bottom: 50px;
 }
-.logo {
+.UPlogo {
   object-fit:contain;
-  max-width: 70%;
+  width: 15%;
+  row-gap: 2px;
+}
+.UPloadlogo {
+  object-fit:contain;
+  width: 18%;
 }
 .buttons {
   display: flex;
   flex-direction: row;
   gap: 10px;
-  margin-top: 20px;
+  margin-top: 30px;
 }
 </style>

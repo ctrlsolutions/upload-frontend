@@ -72,9 +72,4 @@ body {
   height: 100vh;
   object-fit: contain;
 }
-
 </style>
-
-
-
-
