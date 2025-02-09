@@ -1,7 +1,30 @@
 
+
 <template>
     <div :class="[$style.container, isSignupRoute ? $style['red-bg'] : $style['green-bg']]">
+    <div :class="[$style.container, isSignupRoute ? $style['red-bg'] : $style['green-bg']]">
         <main :class="$style['content-container']">
+            <div :class="$style.imageContainer">
+                <div :class="$style.header">
+                    <div :class="$style.logoContainer">
+                        <img src="../assets/UPLogo.svg" :class="$style.logo">
+                        <img src="../assets/UPloadLogo.svg" :class="$style.logo">
+                    </div>
+                    <div :class="$style.buttonContainer">
+                        <router-link 
+                            to="/auth/signup" 
+                            :class="{ [$style.signupButton]: true, [$style.signupButtonActive]: isSignupRoute }">
+                            Signup
+                        </router-link>
+                        <router-link 
+                            to="/auth/login" 
+                            :class="{ [$style.loginButton]: true, [$style.loginButtonActive]: !isSignupRoute }">
+                            Login
+                        </router-link>
+                    </div>
+                </div>
+                <img src="../assets/backgroundImages/oble_closeup.png" :class="$style.img">
+            </div>    
             <div :class="$style.imageContainer">
                 <div :class="$style.header">
                     <div :class="$style.logoContainer">
@@ -31,9 +54,31 @@
 <script setup>
     import { computed } from 'vue';
     import { useRoute } from 'vue-router';
+    import { computed } from 'vue';
+    import { useRoute } from 'vue-router';
 
     const route = useRoute();
+    const route = useRoute();
 
+    const isSignupRoute = computed(() => route.path === '/auth/signup');
+
+    const signupButtonClass = computed(() => {
+    return [
+        $style.signupButton,
+        isSignupRoute.value ? $style['signupButtonActive'] : '',
+    ];
+    });
+
+    const loginButtonClass = computed(() => {
+    return [
+        $style.loginButton,
+        !isSignupRoute.value ? $style['loginButtonActive'] : '',
+    ];
+    });
+
+
+    console.log(route.path)
+    console.log('isSignupRoute', isSignupRoute.value)
     const isSignupRoute = computed(() => route.path === '/auth/signup');
 
     const signupButtonClass = computed(() => {
@@ -63,7 +108,24 @@
         width: 100vw;
         height: 100vh;
     }
+    .container {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        width: 100vw;
+        height: 100vh;
+    }
 
+    .content-container {
+        display: flex;
+        justify-content: space-around;
+        align-items: center;
+        
+        width: 80%;
+        height: 90%;
+        background-color: white;
+        border-radius: 40px;
+    }
     .content-container {
         display: flex;
         justify-content: space-around;
