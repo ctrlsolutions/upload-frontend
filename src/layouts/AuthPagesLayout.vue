@@ -78,17 +78,33 @@
     .imageContainer {
         position: relative;
         display: flex;
+        justify-content: center;
         align-items: center;
-        height: 98%;
+        flex: 1;
+        height: 100%;
+        max-width: 40%;
+        box-sizing: border-box;
+        padding: 1rem;
+    }
+    
+    .img {
+        width: 100%;
+        height: 100%;
+        max-height: 90vh;
+        object-fit: cover;
+        border-radius: 2rem;
     }
 
     .header {
         position: absolute;
-        top: 20px;
-        left: 15px;
+        top: 1.5rem;
+        left: 0;
+        width: 100%;
         display: flex;
         justify-content: space-between;
-        width: 94%;
+        align-items: center;
+        box-sizing: border-box;
+        padding: 0 2rem 0 2rem;
     }
 
     .logoContainer {
@@ -158,8 +174,4 @@
         background-color: rgb(6, 78, 0);
     }
 
-    .img {
-        height: 98%;
-        border-radius: 36px;
-    }
 </style>
