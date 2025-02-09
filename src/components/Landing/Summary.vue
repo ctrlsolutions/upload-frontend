@@ -1,15 +1,51 @@
 <template>
-  <div class="container">LANDING Summary</div>
+  <div class="report-summary">
+    <h1 class="title">QUARTERLY REPORT SUMMARY</h1>
+    <p class="date">01/25/25 - 06/25/25</p>
+
+    <div class="report-content">
+      <div class="pie-chart-section">
+        <div class="total-reports">
+          <p class="report-number">69,420</p>
+          <p class="report-label">REPORTS</p>
+        </div>
+        <img src="@/assets/pie-chart.png" alt="Pie Chart" class="pie-chart" />
+      </div>
+
+      <div class="legend">
+        <ul>
+          <li v-for="(item, index) in reportTypes" :key="index">
+            <span :style="{ backgroundColor: item.color }" class="color-box"></span>
+            {{ item.label }}
+          </li>
+        </ul>
+      </div>
+    </div>
+  </div>
 </template>
-<script></script>
+
+<script>
+export default {
+  name: "QuarterlyReportSummary",
+  data() {
+    return {
+      reportTypes: [
+        { label: "Research", color: "red" },
+        { label: "Publication as a Research Output", color: "orange" },
+        { label: "Paper Presentation as a Research Output", color: "yellow" },
+        { label: "Patent as a Research Output", color: "green" },
+        { label: "Other Research Output", color: "blue" },
+        { label: "Training Course and/or Advisory Service", color: "indigo" },
+        { label: "Extension Program", color: "purple" },
+        { label: "Partnership with Stakeholder", color: "magenta" },
+        { label: "Others", color: "gray" }
+      ]
+    };
+  }
+};
+</script>
+
 <style lang="scss">
-<<<<<<< Updated upstream
-body {
-  height: 100vh;
-}
-.container {
-  height: 100vh;
-=======
 .report-summary {
   display: flex;
   flex-direction: column;
@@ -62,7 +98,7 @@ body {
   }
 
   .report-label {
-    font-weight: 800; 
+    font-weight: 800;
     margin-top: 0;
   }
 
@@ -87,6 +123,6 @@ body {
       }
     }
   }
->>>>>>> Stashed changes
 }
+
 </style>

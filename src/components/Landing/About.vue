@@ -24,23 +24,29 @@ export default {
   max-width: 100%;
   min-height: 100vh; 
   padding: 30px; 
-  padding-left: 90px;
+  padding-left: 100px;
+  padding-top: 100px;
   gap: 10px; 
 
   // BREAKPOINTS
   @include sm {
     max-width: 90%;
-    padding-left: 90px; 
+    padding-left: 100px; 
+    padding-top: 100px;
+
   }
 
   @include md {
     max-width: 70%;
-    padding-left: 90px; 
+    padding-left: 100px; 
+    padding-top: 100px;
   }
 
   @include lg {
     max-width: 56.25rem;
-    padding-left: 90px; 
+    padding-left: 100px; 
+    padding-right: 50px; 
+    padding-top: 100px;
   }
 }
 
