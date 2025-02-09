@@ -2,7 +2,9 @@
     <div :class="[$style.container, backgroundStyle ? $style['red-bg'] : $style['blue-bg']]">
         <main :class="$style['content-container']">
             <img src="../assets/backgroundImages/oble_closeup.png" :class="$style.img">
-            <RouterView></RouterView>
+            <RouterView>   
+                <SignupForm />
+            </RouterView>
         </main>
     </div>
 </template>
@@ -10,6 +12,7 @@
 <script setup>
 import { computed } from 'vue';
 import { useRoute } from 'vue-router';
+import SignupForm from '@/components/Auth/SignupForm.vue';
 
 
 const route = useRoute();
