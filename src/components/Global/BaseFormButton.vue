@@ -11,6 +11,8 @@
 </template>
 
 <script>
+import { useRouter } from 'vue-router';
+
 export default {
   props: {
     route: {
@@ -29,6 +31,23 @@ export default {
       type: String,
       default: 'auto',
     },
+    type: {
+      type: String,
+      required: true,
+    }
+  },
+  setup(props, { emit }) {
+    const router = useRouter();
+
+    const handleClick = () => {
+      emit('click');
+      
+      if (props.route) {
+        router.push(props.route);
+      }
+    };
+
+    return { handleClick };
   },
   computed: {
     variantClass() {
@@ -44,11 +63,6 @@ export default {
       }
 
       return styles
-    },
-  },
-  methods: {
-    handleClick() {
-      this.defineEmit('click');
     },
   },
 };
