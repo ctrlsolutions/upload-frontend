@@ -31,11 +31,11 @@ props: {
   },
   width: {
     type: String,
-    default: 'auto',
+    default: 'null',
   },
   height: {
     type:String,
-    default: 'auto',
+    default: 'null',
   },
 },
 computed: {
@@ -60,17 +60,17 @@ computed: {
   .input-box {
     font-family: "Inter", serif;
     @include sm {
-      width: 5rem;
+      width: 15rem;
       padding: 0.2rem 1.3rem;
       font-size: 0.8em;
     }
     @include md {
-      width: 7rem;
+      width: 20rem;
       padding: 0.3rem 1.5rem;
       font-size: 1em;
     }
     @include lg {
-      width: 9rem;
+      width: 25rem;
       padding: 0.15rem 2rem;
       font-size: 1.3em;
     }
