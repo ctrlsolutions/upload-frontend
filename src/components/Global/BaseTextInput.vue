@@ -59,19 +59,21 @@ computed: {
 <style lang="scss" scoped>
   .input-box {
     font-family: "Inter", serif;
+    height: fit-content;
+    border-radius: 0.8rem;
     @include sm {
       width: 15rem;
-      padding: 0.2rem 1.3rem;
-      font-size: 0.8em;
+      padding: 0.5rem 0.6rem;
+      font-size: 1em;
     }
     @include md {
-      width: 20rem;
-      padding: 0.3rem 1.5rem;
+      width: 18rem;
+      padding: 0.5rem 0.8rem;
       font-size: 1em;
     }
     @include lg {
-      width: 25rem;
-      padding: 0.15rem 2rem;
+      width: 20rem;
+      padding: 0.5rem 1rem;
       font-size: 1.3em;
     }
 
@@ -81,13 +83,10 @@ computed: {
     }
 
     &--red {
-      border: 0.2rem $red;
-      border-radius: 1.2rem;
+      border: 0.15rem $red;
       border-style: solid;
-      padding: 1.25rem;
       outline: none;
       font-weight: bold;
-      font-size: medium;
       color: $red;
 
       &::placeholder {
@@ -97,12 +96,9 @@ computed: {
 
     &--green {
       border: 0.15rem $green;
-      border-radius: 1.25rem;
-      padding: 1.25rem;
       border-style: solid;
       outline: none;
       font-weight: bold;
-      font-size: medium;
       color: $green;
 
       &::placeholder {
