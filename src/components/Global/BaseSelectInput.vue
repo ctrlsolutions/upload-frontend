@@ -75,7 +75,7 @@
   
   .form-dropdown__button-separator {
     width: 1px;
-    height: 2rem;
+    height: 4rem;
     background-color: $red;
   }
   
