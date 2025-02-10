@@ -3,7 +3,7 @@
   :id="id"
   :type="type" 
   :class="['input-box',variantClass]" 
-  :style="{ width: width, height: height}" 
+  :style="boxStyle" 
   :placeholder="placeholder"
   v-bind="$attrs"
   />
@@ -43,20 +43,14 @@ computed: {
     return `input-box--${this.variant}`
   },
   boxStyle() {
-    const widthValue = parseFloat(this.width) || 0
-    const heightValue = parseFloat(this.height) || 0
-
-    const fontSize = (widthValue + heightValue) / 10
-
-    const paddingTopBottom = heightValue / 5
-    const paddingLeftRight = widthValue / 10
-
-    return {
-      width: this.width,
+    const styles = {
       height: this.height,
-      fontSize: `${fontSize}px`,
-      padding: `${paddingTopBottom}px ${paddingLeftRight}px`, 
     }
+    if(this.width) {
+      styles.width = this.width
+    }
+
+    return styles
   }
 },
 }
@@ -65,6 +59,21 @@ computed: {
 <style lang="scss" scoped>
   .input-box {
     font-family: "Inter", serif;
+    @include sm {
+      width: 5rem;
+      padding: 0.2rem 1.3rem;
+      font-size: 0.8em;
+    }
+    @include md {
+      width: 7rem;
+      padding: 0.3rem 1.5rem;
+      font-size: 1em;
+    }
+    @include lg {
+      width: 9rem;
+      padding: 0.15rem 2rem;
+      font-size: 1.3em;
+    }
 
     &::placeholder {
       color: #999;
