@@ -17,6 +17,7 @@
 import BaseNavButton from '@/components/Global/BaseNavButton.vue';
 import BaseFormCheckbox from '@/components/Global/BaseFormCheckbox.vue';
 import BaseFormRadio from '@/components/Global/BaseFormRadio.vue';
+import BaseTextInput from '@/components/Global/BaseTextInput.vue';
 import Home from '@/components/Landing/Home.vue'
 import About from '@/components/Landing/About.vue'
 import Summary from '@/components/Landing/Summary.vue'
@@ -26,6 +27,7 @@ export default {
     BaseNavButton,
     BaseFormCheckbox,
     BaseFormRadio,
+    BaseTextInput,
     Home,
     About,
     Summary,
