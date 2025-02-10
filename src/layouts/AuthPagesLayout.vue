@@ -1,4 +1,3 @@
-
 <template>
     <div :class="[$style.container, isSignupRoute ? $style['red-bg'] : $style['green-bg']]">
         <main :class="$style['content-container']">
@@ -9,16 +8,8 @@
                         <img src="../assets/UPloadLogo.svg" :class="$style.logo">
                     </div>
                     <div :class="$style.buttonContainer">
-                        <router-link 
-                            to="/auth/signup" 
-                            :class="{ [$style.signupButton]: true, [$style.signupButtonActive]: isSignupRoute }">
-                            Signup
-                        </router-link>
-                        <router-link 
-                            to="/auth/login" 
-                            :class="{ [$style.loginButton]: true, [$style.loginButtonActive]: !isSignupRoute }">
-                            Login
-                        </router-link>
+                        <BaseNavButton id="signup" route="/auth/signup" :variant="isSignupRoute ? 'red-full' : 'empty'" :class="{ 'bounce': animateButton }" width="7rem">Signup</BaseNavButton>
+                        <BaseNavButton id="login" route="/auth/login" :variant="isSignupRoute ? 'empty' : 'green-full'" :class="{ 'bounce': animateButton }" width="7rem">Login</BaseNavButton>
                     </div>
                 </div>
                 <img src="../assets/backgroundImages/oble_closeup.png" :class="$style.img">
@@ -29,30 +20,24 @@
 </template>
 
 <script setup>
-    import { computed } from 'vue';
+    import { computed, watch, ref } from 'vue';
     import { useRoute } from 'vue-router';
+    import BaseNavButton from '@/components/Global/BaseNavButton.vue';
 
     const route = useRoute();
-
     const isSignupRoute = computed(() => route.path === '/auth/signup');
 
-    const signupButtonClass = computed(() => {
-    return [
-        $style.signupButton,
-        isSignupRoute.value ? $style['signupButtonActive'] : '',
-    ];
-    });
+    const animateButton = ref(false);
 
-    const loginButtonClass = computed(() => {
-    return [
-        $style.loginButton,
-        !isSignupRoute.value ? $style['loginButtonActive'] : '',
-    ];
-    });
-
-
-    console.log(route.path)
-    console.log('isSignupRoute', isSignupRoute.value)
+    watch(route, (newRoute, oldRoute) => {
+    if (
+        (newRoute.path === "/auth/signup" || newRoute.path === "/auth/login") &&
+        (oldRoute.path === "/auth/signup" || oldRoute.path === "/auth/login")
+    ) {
+        animateButton.value = true;
+        setTimeout(() => (animateButton.value = false), 500);
+    }
+});
 </script>
 
 <style module>
@@ -104,6 +89,7 @@
         justify-content: space-between;
         align-items: center;
         box-sizing: border-box;
+        flex-wrap: wrap;
         padding: 0 2rem 0 2rem;
     }
 
@@ -113,62 +99,39 @@
     }
 
     .logo {
-        height: 50px;
+        height: 2.8rem;
         width: auto;
     }
 
     .buttonContainer {
         display: flex;
         align-items: center;
-        gap: 5px;
+        flex-wrap: wrap;
+        gap: 0rem;
     }
 
-    .signupButton {
-        background: none;
-        border: none;
-        font-size: 18px;
-        font-weight: bold;
-        cursor: pointer;
-        padding: 8px 20px;
-        color: black;
+    @keyframes bounce {
+        0% { transform: translateY(0); }
+        50% { transform: translateY(-10px); }
+        100% { transform: translateY(0); }
     }
-
-    .loginButton {
-        border: none;
-        font-size: 18px;
-        font-weight: bold;
-        padding: 8px 20px;
-        cursor: pointer;
-        color: black;
-    }
-    
-    .signupButtonActive {
-        background-color: #4d0000;
-        color: white;
-        border-radius: 20px;
-        padding: 8px 20px;
-    }
-
-    .loginButtonActive {
-        background-color: #004d38;
-        color: white;
-        border-radius: 20px;
-        padding: 8px 20px;
+    .bounce {
+        animation: bounce 0.5s cubic-bezier(0.25, 1, 0.5, 1);
     }
 
     .red-bg {
-        background-image: url('../assets/backgroundImages/BG Photo.png');
+        background-image: url('../assets/backgroundImages/bgee.png');
         background-blend-mode: multiply;
-        background-size: 140%;
+        background-size: cover;
         background-position: center;
         background-repeat: no-repeat;
         background-color: rgb(116, 0, 23);
     }
 
     .green-bg {
-        background-image: url('../assets/backgroundImages/BG Photo.png');
+        background-image: url('../assets/backgroundImages/bgee.png');
         background-blend-mode: multiply;
-        background-size: 140%;
+        background-size: cover;
         background-position: center;
         background-repeat: no-repeat;
         background-color: rgb(6, 78, 0);
