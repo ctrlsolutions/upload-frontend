@@ -101,11 +101,6 @@ export default {
   margin-top: 0.8rem;
 }
 
-.form-button--black {
-  background-color: $black;
-  margin-top: 0.8rem;
-}
-
 .form-button:hover {
   opacity: 0.9;
 }
