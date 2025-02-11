@@ -24,31 +24,6 @@ const selectedValue = ref("");
 
 <style lang="scss" scoped>
 
-// Breakpoints
-$breakpoint-sm: 576px;
-$breakpoint-md: 768px;
-$breakpoint-lg: 992px;
-$breakpoint-xl: 1200px;
-
-// Mixins
-@mixin sm {
-  @media (min-width: #{$breakpoint-sm}) {
-    @content;
-  }
-}
-
-@mixin md {
-  @media (min-width: #{$breakpoint-md}) {
-    @content;
-  }
-}
-
-@mixin lg {
-  @media (min-width: #{$breakpoint-lg}) {
-    @content;
-  }
-}
-
 .custom-dropdown {
   position: relative;
   display: inline-block;
@@ -66,7 +41,7 @@ select {
   background: transparent;
   cursor: pointer;
   width: 100%;
-  color: #ffffff;
+  color: $white;
 
   @include sm {
     min-width: 10rem;
@@ -87,7 +62,7 @@ select {
   }
 
   &:not([value=""]) {
-    color: #ffffff;
+    color: $white;
     font-weight: 500;
   }
 }
@@ -113,30 +88,30 @@ select:focus {
 }
 
 select option {
-  background: var(--background-color, #ffffff);
+  background: var(--background-color, $white);
   color: var(--text-color, $red);
 
   &:checked {
     background-color: rgba(255, 255, 255, 0.1);
-    color: #ffffff;
+    color: $white;
   }
 }
 
 select option[value=""] {
-  color: #ffffff;
+  color: $white;
 }
 
 @media (prefers-color-scheme: dark) {
   :root {
     --background-color: $red;
-    --text-color: #ffffff;
+    --text-color: $white;
   }
 
   select {
     border-color: $red;
 
     &:not([value=""]) {
-      color: #ffffff;
+      color: $white;
     }
   }
 
@@ -145,12 +120,12 @@ select option[value=""] {
   }
 
   select option[value=""] {
-    color: #ffffff;
+    color: $white;
   }
 
   select option:checked {
     background-color: rgba(255, 255, 255, 0.2);
-    color: #ffffff;
+    color: $white;
   }
 
   .dropdown-icon {
