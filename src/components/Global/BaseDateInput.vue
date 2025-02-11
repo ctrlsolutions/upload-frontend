@@ -1,239 +1,288 @@
+<script setup>
+import { ref, computed, onMounted, onUnmounted } from 'vue';
+
+const props = defineProps({
+  modelValue: {
+    type: String,
+    default: ''
+  },
+  theme: {
+    type: Object,
+    default: () => ({
+      color: '#751113',
+      radius: '0.625rem',
+      fontSize: '1rem',
+      padding: '0.75rem'
+    })
+  },
+  disableFutureDates: {
+    type: Boolean,
+    default: false
+  }
+});
+
+const emit = defineEmits(['update:modelValue']);
+
+const selectedDate = computed({
+  get: () => props.modelValue,
+  set: (value) => emit('update:modelValue', value)
+});
+
+const activeCalendar = ref(false);
+const currentDate = ref(new Date());
+const weekDays = ['Sun', 'Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat'];
+
+const styles = computed(() => ({
+  input: { 
+    borderColor: props.theme.color, 
+    borderRadius: props.theme.radius, 
+    fontSize: props.theme.fontSize, 
+    padding: props.theme.padding, 
+    color: props.theme.color, 
+    paddingRight: `calc(${props.theme.padding} * 3)` 
+  },
+  dropdown: { 
+    borderColor: props.theme.color, 
+    borderRadius: props.theme.radius 
+  }
+}));
+
+const currentMonth = computed(() => currentDate.value.toLocaleString('default', { month: 'long' }));
+const currentYear = computed(() => currentDate.value.getFullYear());
+const firstDayOfMonth = computed(() => new Date(currentYear.value, currentDate.value.getMonth(), 1).getDay());
+const calendarDates = computed(() => Array.from(
+  { length: new Date(currentYear.value, currentDate.value.getMonth() + 1, 0).getDate() }, 
+  (_, i) => {
+    const date = new Date(currentYear.value, currentDate.value.getMonth(), i + 1);
+    date.setHours(12, 0, 0, 0);
+    return date;
+  }
+));
+
+const isDateDisabled = (date) => {
+  if (!props.disableFutureDates) return false;
+  const today = new Date();
+  today.setHours(12, 0, 0, 0);
+  return date > today;
+};
+
+const handleClickOutside = (event) => {
+  if (!document.querySelector('.calendar')?.contains(event.target) && 
+      !document.querySelector('.date-input')?.contains(event.target)) {
+    activeCalendar.value = false;
+  }
+};
+
+onMounted(() => document.addEventListener('click', handleClickOutside));
+onUnmounted(() => document.removeEventListener('click', handleClickOutside));
+
+const toggleCalendar = () => (activeCalendar.value = !activeCalendar.value);
+
+const changeMonth = (delta) => {
+  const newDate = new Date(currentDate.value);
+  newDate.setMonth(newDate.getMonth() + delta);
+  
+  if (props.disableFutureDates) {
+    const today = new Date();
+    if (newDate > today) return;
+  }
+  
+  currentDate.value = newDate;
+};
+
+const selectDate = (date) => {
+  if (isDateDisabled(date)) return;
+  const localDate = new Date(date);
+  localDate.setHours(12, 0, 0, 0); // Set to noon to avoid timezone issues
+  selectedDate.value = localDate.toISOString().split('T')[0];
+  activeCalendar.value = false;
+};
+
+const updateDate = ({ target: { value } }) => {
+  if (!value) return;
+  const dateObj = new Date(value);
+  if (props.disableFutureDates) {
+    const today = new Date();
+    today.setHours(0, 0, 0, 0);
+    if (dateObj > today) return;
+  }
+  selectedDate.value = value;
+};
+</script>
+
 <template>
-    <div class="app-container">
-      <div class="date-picker-container">
-        <div class="date-input-wrapper">
-          <input type="date" :value="selectedDate" @input="updateDate" class="date-input" @click="toggleCalendar" :style="inputStyles"/>
-          <div class="separator-dropdown-container">
-            <div class="separator" :style="{ backgroundColor: primaryColor }"></div>
-            <span class="dropdown" @click="toggleCalendar" :style="{ color: primaryColor }">▼</span>
-          </div>
-          <div v-if="activeCalendar" class="calendar-dropdown" :style="dropdownStyles">
-            <div class="calendar-header">
-              <button @click="changeMonth(-1)" :style="{ color: primaryColor }">←</button>
-              <span :style="{ color: primaryColor }">{{ currentMonth }} {{ currentYear }}</span>
-              <button @click="changeMonth(1)" :style="{ color: primaryColor }">→</button>
-            </div>
-            <div class="calendar-days">
-              <div 
-                class="weekday" 
-                v-for="day in weekDays" 
-                :key="day"
-                :style="{ color: primaryColor }"
-              >
-                {{ day }}
-              </div>
-              <template v-for="i in firstDayOfMonth" :key="`empty-${i}`">
-                <div class="calendar-date empty"></div>
-              </template>
-              <div
-                v-for="date in calendarDates"
-                :key="date"
-                class="calendar-date"
-                @click="selectDate(date)"
-                :style="{ color: primaryColor }"
-              >
-                {{ new Date(date).getDate() }}
-              </div>
-            </div>
-          </div>
+  <div class="date-picker">
+    <div class="input-wrapper">
+      <input 
+        type="date" 
+        :value="selectedDate" 
+        @input="updateDate" 
+        @click="toggleCalendar" 
+        :style="styles.input" 
+        class="date-input" 
+        placeholder="dd/mm/yyyy"
+        :max="disableFutureDates ? new Date().toISOString().split('T')[0] : undefined"
+      />
+      <div class="dropdown-toggle" :style="{ right: theme.padding }">
+        <i class="pi pi-calendar-minus dropdown-icon" @click="toggleCalendar" :style="{ color: theme.color }"></i>
+      </div>
+    </div>
+    <div v-if="activeCalendar" class="calendar" :style="styles.dropdown" @click.stop>
+      <header>
+        <button @click="changeMonth(-1)">
+          <i class="pi pi-arrow-left" :style="{ color: theme.color }"></i>
+        </button>
+        <span>{{ currentMonth }} {{ currentYear }}</span>
+        <button @click="changeMonth(1)" :disabled="disableFutureDates && currentDate.getMonth() === new Date().getMonth()">
+          <i class="pi pi-arrow-right" :style="{ color: theme.color }"></i>
+        </button>
+      </header>
+      <div class="calendar-grid">
+        <div v-for="day in weekDays" :key="day" class="weekday">{{ day }}</div>
+        <div v-for="i in firstDayOfMonth" :key="`empty-${i}`" class="date empty"></div>
+        <div 
+          v-for="date in calendarDates" 
+          :key="date" 
+          class="date" 
+          :class="{ 'disabled': isDateDisabled(date) }"
+          @click="selectDate(date)"
+        >
+          {{ date.getDate() }}
         </div>
       </div>
     </div>
-  </template>
-  
-  <script setup>
-  import { ref, computed } from 'vue';
-  
-  const selectedDate = ref('');
-  const activeCalendar = ref(false);
-  const currentDate = ref(new Date());
-  const weekDays = ["Sun", "Mon", "Tue", "Wed", "Thu", "Fri", "Sat"];
-  
-  const primaryColor = '#751113';
-  const borderRadius = '10px';
-  const fontSize = '16px';
-  const padding = '12px';
-  
-  const inputStyles = computed(() => ({
-    borderColor: primaryColor,
-    backgroundColor: 'transparent',
-    color: primaryColor,
-    borderRadius: borderRadius,
-    fontSize: fontSize,
-    padding: padding
-  }));
-  
-  const dropdownStyles = computed(() => ({
-    borderColor: primaryColor,
-    borderRadius: borderRadius,
-    backgroundColor: 'rgba(255, 255, 255, 0.9)'
-  }));
-  
-  const currentMonth = computed(() => {
-    return currentDate.value.toLocaleString('default', { month: 'long' });
-  });
-  
-  const currentYear = computed(() => {
-    return currentDate.value.getFullYear();
-  });
-  
-  const firstDayOfMonth = computed(() => {
-    const year = currentDate.value.getFullYear();
-    const month = currentDate.value.getMonth();
-    return new Date(year, month, 1).getDay();
-  });
-  
-  const calendarDates = computed(() => {
-    const year = currentDate.value.getFullYear();
-    const month = currentDate.value.getMonth();
-    const daysInMonth = new Date(year, month + 1, 0).getDate();
-    
-    return Array.from({ length: daysInMonth }, (_, i) => {
-      const date = new Date(year, month, i + 1);
-      return `${year}-${String(month + 1).padStart(2, '0')}-${String(i + 1).padStart(2, '0')}`;
-    });
-  });
-  
-  
-  const toggleCalendar = () => {
-    activeCalendar.value = !activeCalendar.value;
-  };
-  
-  const changeMonth = (delta) => {
-    const newDate = new Date(currentDate.value);
-    newDate.setMonth(newDate.getMonth() + delta);
-    currentDate.value = newDate;
-  };
-  
-  const selectDate = (date) => {
-    selectedDate.value = date;
-    activeCalendar.value = false;
-  };
-  
-  const updateDate = (event) => {
-    const isoDate = event.target.value;
-    if (isoDate) {
-      const [year, month, day] = isoDate.split("-");
-      selectedDate.value = `${month}/${day}/${year}`;
-    }
-  };
-  </script>
-  
-  <style scoped>
-  .app-container {
-    padding: 15px;
-    width: 200px;
-    margin: 0 auto;
-    background: transparent;
-  }
-  
-  .date-picker-container {
-    display: flex;
-    flex-direction: column;
-    gap: 10px;
-    padding: 10px;
-    background: transparent;
-  }
-  
-  .date-input-wrapper {
-    position: relative;
-    display: flex;
-    align-items: center;
-    background: transparent;
-  }
-  
-  .date-input {
-    width: 100%;
-    font-weight: bold;
-    text-align: left; /* Changed from 'center' to 'left' */
-    appearance: none;
-    -webkit-appearance: none;
-    -moz-appearance: none;
-    cursor: pointer;
-    border: 2px solid;
-    background: transparent;
-  }
-  
-  .date-input::-webkit-calendar-picker-indicator {
-    display: none;
-  }
-  
-  .separator-dropdown-container {
-    position: absolute;
-    right: 10px;
-    display: flex;
-    align-items: center;
-    gap: 8px;
-    height: calc(100% - 16px);
-    margin: 8px 0;
-  }
-  
-  .separator {
-    width: 1px;
-    height: 45px;
-    opacity: 0.5;
-  }
-  
-  .dropdown {
-    cursor: pointer;
-    font-size: 12px;
-  }
-  
-  .calendar-dropdown {
-    position: absolute;
-    top: 100%;
-    left: 0;
-    right: 0;
-    margin-top: 5px;
-    border: 2px solid;
-    padding: 10px;
-    z-index: 1000;
-    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
-    width: 277px;
-    height: 310px;
-  }
-  
-  .calendar-header {
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    margin-bottom: 10px;
-    font-weight: bold;
-  }
-  
-  .calendar-header button {
-    background: none;
-    border: none;
-    cursor: pointer;
-    font-size: 16px;
-    padding: 5px 10px;
-  }
-  
-  .calendar-days {
-    display: grid;
-    grid-template-columns: repeat(7, 1fr);
-    gap: 5px;
-  }
-  
-  .weekday {
-    text-align: center;
-    font-weight: bold;
-    font-size: 0.9em;
-    padding: 5px;
-  }
-  
-  .calendar-date {
-    text-align: center;
-    padding: 5px;
-    cursor: pointer;
-  }
-  
-  .calendar-date.empty {
-    cursor: default;
-  }
-  
-  .calendar-date:hover {
-    border-radius: 50px;
-    background: rgba(117, 17, 19, 0.1);
-  }
-  </style>
+  </div>
+</template>
+
+<style scoped>
+.date-picker {
+  width: 12.5rem;
+  margin: 0 auto;
+  padding: 0.9375rem;
+  position: relative;
+}
+
+.input-wrapper {
+  position: relative;
+  display: flex;
+  align-items: center;
+}
+
+input {
+  width: 100%;
+  font-weight: bold;
+  text-align: center;
+  appearance: none;
+  -webkit-appearance: none;
+  border: 0.125rem solid;
+  background: transparent;
+  cursor: pointer;
+}
+
+input:focus {
+  outline: none;
+  border-color: v-bind('theme.color');
+}
+
+input::placeholder {
+  text-align: center;
+  color: inherit;
+  opacity: 0.7;
+}
+
+input::-webkit-calendar-picker-indicator { display: none; }
+
+.dropdown-toggle {
+  position: absolute;
+  top: 50%;
+  transform: translateY(-50%);
+  display: flex;
+  align-items: center;
+  pointer-events: none;
+}
+
+.dropdown-icon {
+  cursor: pointer;
+  font-size: 1rem;
+  pointer-events: auto;
+}
+
+.calendar {
+  position: absolute;
+  top: calc(100% - 0.6rem);
+  left: 0;
+  right: 0;
+  padding: 0.625rem;
+  border: 0.125rem solid;
+  background: white;
+  box-shadow: 0 0.25rem 0.375rem rgba(0, 0, 0, 0.1);
+  z-index: 1000;
+  width: max-content;
+  min-width: 16rem;
+}
+
+header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 0.625rem;
+  font-weight: bold;
+  color: v-bind('theme.color');
+}
+
+header button {
+  background: none;
+  border: none;
+  cursor: pointer;
+  font-size: 1rem;
+  padding: 0.3125rem 0.625rem;
+  color: inherit;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+header button:disabled {
+  opacity: 0.5;
+  cursor: not-allowed;
+}
+
+.calendar-grid {
+  display: grid;
+  grid-template-columns: repeat(7, 2.5rem);
+  gap: 0.3rem;
+}
+
+.weekday, .date {
+  text-align: center;
+  padding: 0.3125rem;
+  color: v-bind('theme.color');
+}
+
+.weekday {
+  font-weight: bold;
+  font-size: 0.9em;
+}
+
+.date {
+  cursor: pointer;
+  height: 2.5rem;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.date:not(.empty):not(.disabled):hover {
+  border-radius: 0.5rem; 
+  background: rgba(117, 17, 19, 0.1);
+}
+
+.date.empty {
+  cursor: default;
+}
+
+.date.disabled {
+  opacity: 0.5;
+  cursor: not-allowed;
+}
+</style>
