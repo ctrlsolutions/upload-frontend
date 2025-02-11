@@ -11,7 +11,7 @@
 </template>
 
 <script>
-import { useRouter } from 'vue-router';
+import { useRouter } from 'vue-router'
 
 export default {
   props: {
@@ -34,24 +34,24 @@ export default {
     type: {
       type: String,
       required: true,
-    }
+    },
   },
   setup(props, { emit }) {
-    const router = useRouter();
+    const router = useRouter()
 
     const handleClick = () => {
-      emit('click');
-      
-      if (props.route) {
-        router.push(props.route);
-      }
-    };
+      emit('click')
 
-    return { handleClick };
+      if (props.route) {
+        router.push(props.route)
+      }
+    }
+
+    return { handleClick }
   },
   computed: {
     variantClass() {
-      return this.variant ? `form-button--${this.variant}` : '';
+      return this.variant ? `form-button--${this.variant}` : ''
     },
     buttonStyle() {
       const styles = {
@@ -65,18 +65,18 @@ export default {
       return styles
     },
   },
-};
+}
 </script>
 
 <style lang="scss">
 .form-button {
   border: none;
   border-radius: 0.8rem;
-  padding: 1.2rem;
+  padding: 0.9rem;
   cursor: pointer;
-  font-family: "Inter", sans-serif;
+  font-family: 'Inter', sans-serif;
   font-weight: 800;
-  color: #fff;
+  color: $white;
   text-align: center;
   font-size: 1rem;
   margin-bottom: 1rem;
@@ -112,7 +112,10 @@ export default {
 
 .form-button--green {
   background-color: $green;
-  margin-top: 0.8rem;
+}
+
+.form-button--black {
+  background-color: $black;
 }
 
 .form-button:hover {
@@ -120,7 +123,7 @@ export default {
 }
 
 .form-button:focus {
-  outline: 0.125rem solid #fff;
+  outline: 0.125rem solid $white;
   outline-offset: 0.125rem;
 }
 </style>
