@@ -1,7 +1,7 @@
 <template>
   <div class="custom-dropdown">
     <select v-model="selectedValue">
-      <option value="" disabled selected>Choose an option</option>
+      <option value="" disabled selected>{{ placeholder }}</option>
       <option v-for="option in options" :key="option.value" :value="option.value">
         {{ option.label }}
       </option>
@@ -16,15 +16,43 @@ import "primeicons/primeicons.css";
 
 const props = defineProps<{
   options: { value: string; label: string }[];
+  placeholder?: string;
 }>();
 
 const selectedValue = ref("");
 </script>
 
 <style lang="scss" scoped>
+
+// Breakpoints
+$breakpoint-sm: 576px;
+$breakpoint-md: 768px;
+$breakpoint-lg: 992px;
+$breakpoint-xl: 1200px;
+
+// Mixins
+@mixin sm {
+  @media (min-width: #{$breakpoint-sm}) {
+    @content;
+  }
+}
+
+@mixin md {
+  @media (min-width: #{$breakpoint-md}) {
+    @content;
+  }
+}
+
+@mixin lg {
+  @media (min-width: #{$breakpoint-lg}) {
+    @content;
+  }
+}
+
 .custom-dropdown {
   position: relative;
   display: inline-block;
+  width: 100%;
 }
 
 select {
@@ -37,8 +65,31 @@ select {
   border-radius: 0.3125rem;
   background: transparent;
   cursor: pointer;
-  min-width: 12.5rem;
-  color: currentColor;
+  width: 100%;
+  color: #ffffff;
+
+  @include sm {
+    min-width: 10rem;
+    padding: 0.2rem 1.3rem;
+    font-size: 0.8em;
+  }
+
+  @include md {
+    min-width: 12rem;
+    padding: 0.3rem 1.5rem;
+    font-size: 1em;
+  }
+
+  @include lg {
+    min-width: 13rem;
+    padding: 0.15rem 2rem;
+    font-size: 1.3em;
+  }
+
+  &:not([value=""]) {
+    color: #ffffff;
+    font-weight: 500;
+  }
 }
 
 .dropdown-icon {
@@ -64,10 +115,15 @@ select:focus {
 select option {
   background: var(--background-color, #ffffff);
   color: var(--text-color, $red);
+
+  &:checked {
+    background-color: rgba(255, 255, 255, 0.1);
+    color: #ffffff;
+  }
 }
 
 select option[value=""] {
-  color: #666;
+  color: #ffffff;
 }
 
 @media (prefers-color-scheme: dark) {
@@ -78,6 +134,10 @@ select option[value=""] {
 
   select {
     border-color: $red;
+
+    &:not([value=""]) {
+      color: #ffffff;
+    }
   }
 
   select:hover {
@@ -85,7 +145,12 @@ select option[value=""] {
   }
 
   select option[value=""] {
-    color: $red;
+    color: #ffffff;
+  }
+
+  select option:checked {
+    background-color: rgba(255, 255, 255, 0.2);
+    color: #ffffff;
   }
 
   .dropdown-icon {
