@@ -20,6 +20,7 @@ const emit = defineEmits(['update:modelValue']);
 
 const styles = computed(() => ({
   input: { 
+    fontFamily: "'Inter', sans-serif",
     borderColor: props.color,
     borderRadius: '0.625rem',
     fontSize: '1rem',
@@ -52,7 +53,7 @@ const updateDate = ({ target: { value } }) => {
   </div>
 </template>
 
-<style scoped>
+<style lang="lang" scoped>
 .date-picker {
   margin: 0 auto;
   padding: 0.9375rem;
@@ -67,6 +68,7 @@ const updateDate = ({ target: { value } }) => {
 .date-input {
   width: 100%;
   font-weight: bold;
+  font-family: 'Inter', sans-serif;
   text-align: center;
   border: 0.125rem solid;
   background: transparent;
