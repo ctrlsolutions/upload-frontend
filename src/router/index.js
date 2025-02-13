@@ -4,6 +4,7 @@ import LogInPage from '@/pages/LogInPage.vue'
 import AuthPagesLayout from '@/layouts/AuthPagesLayout.vue'
 import EmptyPagesLayout from '@/layouts/EmptyPagesLayout.vue'
 import LandingPage from '@/pages/LandingPage.vue'
+import AuthenticatedPagesLayout from '@/layouts/AuthenticatedPagesLayout.vue'
 
 const router = createRouter({
   history: createWebHistory(import.meta.env.BASE_URL),
@@ -44,11 +45,16 @@ const router = createRouter({
       name: 'signup',
       redirect: '/auth/signup',
     },
-
     {
       path: '/login',
       name: 'login',
       redirect: '/auth/login',
+    },
+    {
+      path: '/authenticated',
+      name: 'authenticated',
+      component: AuthenticatedPagesLayout,
+      // children will be tabs as components.
     },
   ],
 })
