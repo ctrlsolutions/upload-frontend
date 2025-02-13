@@ -9,7 +9,7 @@
           <p class="report-number">69,420</p>
           <p class="report-label">REPORTS</p>
         </div>
-        <img src="@/assets/pie-chart.png" alt="Pie Chart" class="pie-chart" />
+        <img src="#" alt="Pie Chart" class="pie-chart" />
       </div>
 
       <div class="legend">
