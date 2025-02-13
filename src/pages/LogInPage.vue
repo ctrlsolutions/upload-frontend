@@ -3,10 +3,23 @@
     <div class="header">
       <h1>Log in</h1>
     </div>
-      <p>Welcome! Log in to access your dashboard.</p>
+    <p>Welcome! Log in to access your dashboard.</p>
     <div class="input-group">
-      <BaseTextInput id="email" type="email" placeholder="Email" variant="green" width="30rem" height="3.5rem"/>
-      <BaseTextInput id="password" type="password" placeholder="Password" variant="green" width="30rem" height="3.5rem"/>
+      <BaseTextInput
+        id="email"
+        type="email"
+        placeholder="Email"
+        variant="green"
+        height="3.5rem"
+      />
+      <BaseTextInput
+        id="password"
+        type="password"
+        placeholder="Password"
+        variant="green"
+        class="text-input"
+        height="3.5rem"
+      />
     </div>
     <div class="forgot-password">
       <a href="#">Forgot Password?</a>
@@ -18,23 +31,30 @@
       <p>OR</p>
     </div>
     <div class="cont-google">
-      <BaseFormButton variant="red" width="30rem"><v-icon name="fc-google" scale="1.2"></v-icon><span class="google">CONTINUE WITH GOOGLE</span></BaseFormButton>
+      <BaseFormButton variant="red" width="30rem"
+        ><v-icon name="fc-google" scale="1.2"></v-icon
+        ><span class="google">CONTINUE WITH GOOGLE</span></BaseFormButton
+      >
     </div>
   </div>
 </template>
 
 <script>
-import BaseTextInput from "@/components/Global/BaseTextInput.vue";
-import BaseFormButton from "@/components/Global/BaseFormButton.vue";
+import BaseTextInput from '@/components/Global/BaseTextInput.vue'
+import BaseFormButton from '@/components/Global/BaseFormButton.vue'
 export default {
   components: {
     BaseTextInput,
     BaseFormButton,
   },
-};
+}
 </script>
 
 <style lang="scss" scoped>
+.text-input {
+  width: inherit;
+  max-width: 40vw;
+}
 .container {
   display: flex;
   flex-direction: column;
@@ -148,9 +168,9 @@ export default {
 }
 
 .forgot-password {
-  width: 30rem;     
-  text-align: right;   
-  margin-top: -0.5rem; 
+  width: 30rem;
+  text-align: right;
+  margin-top: -0.5rem;
   padding-right: 1rem;
   margin-bottom: 1.5rem;
 
