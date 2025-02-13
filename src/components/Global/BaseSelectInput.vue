@@ -1,135 +1,102 @@
 <template>
-  <div class="custom-dropdown">
-    <select v-model="selectedValue">
-      <option value="" disabled selected>{{ placeholder }}</option>
-      <option v-for="option in options" :key="option.value" :value="option.value">
+  <div class="dropdown-container">
+    <select v-model="selectedValue" class="dropdown" :style="dropdownStyle">
+      <option value="" disabled class="placeholder">{{ placeholder }}</option>
+      <option
+        v-for="option in options"
+        :key="option.value"
+        :value="option.value"
+        class="dropdown-option"
+      >
         {{ option.label }}
       </option>
     </select>
-    <i class="pi pi-angle-down dropdown-icon"></i>
+    <v-icon name="bi-caret-down-fill" class="dropdown-icon" />
   </div>
 </template>
 
 <script setup lang="ts">
-import { ref, defineProps } from "vue";
-import "primeicons/primeicons.css";
+import { ref, defineProps, computed } from 'vue'
 
 const props = defineProps<{
-  options: { value: string; label: string }[];
-  placeholder?: string;
-}>();
+  options: { value: string; label: string }[]
+  placeholder?: string
+  width?: string | null
+}>()
 
-const selectedValue = ref("");
+const selectedValue = ref('')
+
+const dropdownStyle = computed(() => ({
+  ...(props.width ? { width: props.width } : {}),
+}))
 </script>
 
 <style lang="scss" scoped>
-
-.custom-dropdown {
+.dropdown-container {
   position: relative;
   display: inline-block;
-  width: 100%;
 }
 
-select {
+.dropdown {
+  display: flex;
+  background-color: transparent;
+  text-overflow: ellipsis;
+  font-family: 'Inter', serif;
+  font-weight: bold;
   appearance: none;
   -webkit-appearance: none;
   -moz-appearance: none;
-  padding: 0.625rem 2.5rem 0.625rem 0.625rem;
-  font-size: 1rem;
-  border: 0.0625rem solid $red;
-  border-radius: 0.3125rem;
-  background: transparent;
+  padding: 0.5rem 2.5rem 0.5rem 0.8rem;
+  border: 0.15rem solid $red;
+  border-radius: 0.8rem;
   cursor: pointer;
+  color: $red;
   width: 100%;
-  color: $white;
 
   @include sm {
-    min-width: 10rem;
-    padding: 0.2rem 1.3rem;
-    font-size: 0.8em;
+    width: 10rem;
+    font-size: 1em;
   }
 
   @include md {
-    min-width: 12rem;
-    padding: 0.3rem 1.5rem;
+    width: 15rem;
     font-size: 1em;
   }
 
   @include lg {
-    min-width: 13rem;
-    padding: 0.15rem 2rem;
+    width: 20rem;
     font-size: 1.3em;
   }
 
-  &:not([value=""]) {
-    color: $white;
-    font-weight: 500;
+  &:not([value='']) {
+    color: $red;
+    font-weight: bold;
   }
+}
+
+.dropdown:focus {
+  outline: none;
+}
+
+.placeholder {
+  &:disabled {
+    font-style: italic;
+    color: gray;
+  }
+}
+
+.dropdown option {
+  color: $red;
+  font-family: inherit !important;
 }
 
 .dropdown-icon {
   position: absolute;
-  right: 0.625rem;
+  right: 0.5rem;
   top: 50%;
   transform: translateY(-50%);
   font-size: 1.25rem;
-  color: #666666;
+  fill: $red;
   pointer-events: none;
-}
-
-select:hover {
-  border-color: $red;
-}
-
-select:focus {
-  border-color: $red;
-  outline: none;
-  box-shadow: 0 0 0 0.125rem rgba(123, 17, 19, 0.25);
-}
-
-select option {
-  background: var(--background-color, $white);
-  color: var(--text-color, $red);
-
-  &:checked {
-    background-color: rgba(255, 255, 255, 0.1);
-    color: $white;
-  }
-}
-
-select option[value=""] {
-  color: $white;
-}
-
-@media (prefers-color-scheme: dark) {
-  :root {
-    --background-color: $red;
-    --text-color: $white;
-  }
-
-  select {
-    border-color: $red;
-
-    &:not([value=""]) {
-      color: $white;
-    }
-  }
-
-  select:hover {
-    border-color: $red;
-  }
-
-  select option[value=""] {
-    color: $white;
-  }
-
-  select option:checked {
-    background-color: rgba(255, 255, 255, 0.2);
-    color: $white;
-  }
-
-  .dropdown-icon {
-    color: $red;
-  }
 }
 </style>
