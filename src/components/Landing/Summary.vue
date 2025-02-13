@@ -93,12 +93,12 @@ export default {
   }
 
     .report-number {
-    font-weight: 600; // Ensures "69,420" is bold
+    font-weight: 600; 
     margin-bottom: 0;
   }
 
   .report-label {
-    font-weight: 800; // Ensures "REPORTS" is bold
+    font-weight: 800;
     margin-top: 0;
   }
 

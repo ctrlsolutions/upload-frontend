@@ -17,7 +17,7 @@ export default {
 .about-container {
   position: relative;
   z-index: 2;
-  display: flexa;
+  display: flex;
   flex-direction: column;
   align-items: flex-start;
   justify-content: center;
@@ -25,11 +25,10 @@ export default {
   font-family: 'Inter', sans-serif;
   font-weight: 800; 
 
-  min-height: 100vh; // Full height
-  max-width: 100%;   // Default max-width
+  min-height: 100vh; 
+  max-width: 100%;  
 
 
-  // BREAKPOINTS
   @include sm { 
     min-width: 20rem; 
     padding-left: 2rem; 
@@ -55,7 +54,7 @@ export default {
       padding-bottom: 22rem;
   }
 
-  @include xl { //Okay na
+  @include xl {
       min-width: 70rem;
       padding-left: 7rem;
       padding-right: 17rem;
@@ -67,7 +66,6 @@ export default {
 .about-content {
   color: #333;
 
-  // BREAKPOINTS
   @include sm {
     font-size: .450rem;
   }
@@ -86,7 +84,6 @@ export default {
 }
 
 .title {
-  // BREAKPOINTS
   color: maroon;
   font-weight: 800; 
 
