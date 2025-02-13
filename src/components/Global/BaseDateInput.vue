@@ -6,77 +6,100 @@ const props = defineProps({
     type: String,
     default: ''
   },
-  theme: {
-    type: Object,
-    default: () => ({
-      color: $red,
-      radius: '0.625rem',
-      fontSize: '1rem',
-      padding: '0.75rem'
-    })
+  width: {
+    type: String,
+    default: '12.5rem'
   },
-  disableFutureDates: {
-    type: Boolean,
-    default: false
+  color: {
+    type: String,
+    default: '#751113'
   }
 });
 
 const emit = defineEmits(['update:modelValue']);
 
-const selectedDate = computed({
-  get: () => props.modelValue,
-  set: (value) => emit('update:modelValue', value)
-});
-
 const styles = computed(() => ({
   input: { 
-    borderColor: props.theme.color, 
-    borderRadius: props.theme.radius, 
-    fontSize: props.theme.fontSize, 
-    padding: props.theme.padding, 
-    color: props.theme.color
+    borderColor: props.color,
+    borderRadius: '0.625rem',
+    fontSize: '1rem',
+    padding: '0.75rem',
+    color: props.color,
+    paddingRight: 'calc(0.75rem * 3)'
   }
 }));
+
+const updateDate = ({ target: { value } }) => {
+  if (!value) return;
+  emit('update:modelValue', value);
+};
 </script>
 
 <template>
-  <div class="date-picker">
-    <input 
-      type="date" 
-      v-model="selectedDate"
-      :style="styles.input" 
-      class="date-input"
-      placeholder="dd/mm/yyyy"
-      :max="disableFutureDates ? new Date().toISOString().split('T')[0] : undefined"
-    />
+  <div class="date-picker" :style="{ width: width }">
+    <div class="input-wrapper">
+      <input 
+        type="date" 
+        :value="modelValue" 
+        @input="updateDate" 
+        :style="styles.input" 
+        class="date-input"
+      />
+      <div class="dropdown-toggle" :style="{ right: '0.75rem' }">
+        <i class="pi pi-calendar-minus dropdown-icon" :style="{ color }"></i>
+      </div>
+    </div>
   </div>
 </template>
 
-<style lang="scss" scoped>
+<style scoped>
 .date-picker {
-  width: 12.5rem;
   margin: 0 auto;
   padding: 0.9375rem;
+}
+
+.input-wrapper {
+  position: relative;
+  display: flex;
+  align-items: center;
 }
 
 .date-input {
   width: 100%;
   font-weight: bold;
   text-align: center;
-  appearance: none;
-  -webkit-appearance: none;
   border: 0.125rem solid;
   background: transparent;
   cursor: pointer;
+  appearance: none;
+  -webkit-appearance: none;
 }
 
 .date-input:focus {
   outline: none;
+  border-color: v-bind('color');
 }
 
-.date-input::placeholder {
-  text-align: center;
-  color: inherit;
-  opacity: 0.7;
+.date-input::-webkit-calendar-picker-indicator {
+  opacity: 0;
+  width: 100%;
+  height: 100%;
+  position: absolute;
+  left: 0;
+  top: 0;
+  cursor: pointer;
+}
+
+.dropdown-toggle {
+  position: absolute;
+  top: 50%;
+  transform: translateY(-50%);
+  display: flex;
+  align-items: center;
+  pointer-events: none;
+}
+
+.dropdown-icon {
+  font-size: 1rem;
 }
 </style>
