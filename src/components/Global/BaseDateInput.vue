@@ -1,58 +1,33 @@
-<script setup>
-import { computed } from 'vue';
-
-const props = defineProps({
-  modelValue: {
-    type: String,
-    default: 'red'
-  },
-  width: {
-    type: String,
-    default: '12.5rem'
-  }
-});
-
-const emit = defineEmits(['update:modelValue']);
-
-const styles = computed(() => ({
-  input: { 
-    border: `1px solid ${props.color}`,
-    borderRadius: '0.625rem',
-    fontSize: '1rem',
-    padding: '0.75rem',
-    color: props.color,
-    paddingRight: '2.25rem'
-  }
-}));
-
-const updateDate = ({ target: { value } }) => {
-  if (!value) return;
-  emit('update:modelValue', value);
-};
-</script>
-
 <template>
   <div class="date-picker" :style="{ width: width }">
     <div class="input-wrapper">
-      <input 
-        type="date" 
-        :value="modelValue" 
-        @input="updateDate" 
-        :style="styles.input" 
+      <input
+        ref="inputRef"
+        type="date"
         class="date-input"
+        v-bind="$attrs"
       />
-      <div class="dropdown-toggle" :style="{ right: '0.75rem' }">
-        <v-icon name="bi-calendar-minus-fill" scale="1.2"></v-icon>
+      <div class="dropdown-toggle" @click="openCalendar">
+        <font-awesome-icon :icon="['fas', 'calendar-alt']" style="color: #751113;" />
       </div>
     </div>
   </div>
 </template>
 
-<style lang="scss" scoped>
+<script setup>
+import { ref, computed } from 'vue'
 
-::v-deep(svg) {
-  fill: $red !important;
-}
+const inputRef = ref(null)
+
+const props = defineProps({
+  width: {
+    type: String,
+    default: '12.5rem'
+  }
+})
+</script>
+
+<style lang="scss" scoped>
 
 .date-picker {
   margin: 0 auto;
@@ -70,42 +45,35 @@ const updateDate = ({ target: { value } }) => {
   width: 100%;
   font-weight: bold;
   text-align: center;
-  border: 0.125rem solid;
+  border: 0.125rem solid $red;
   background: transparent;
-  cursor: pointer;
-  appearance: none;
-  -webkit-appearance: none;
-  border-color: $red;
+  cursor: text;
+  border-radius: 0.625rem;
+  padding: 0.75rem;
   color: $red;
+  -webkit-appearance: none;
+  -moz-appearance: none;
+  appearance: none;
+  font-family: 'Inter', sans-serif;
 }
 
 .date-input:focus {
+  outline: none;
   border-color: $red;
-  color: $red;
 }
 
 .date-input::-webkit-calendar-picker-indicator {
-  opacity: 0;
-  width: 100%;
-  height: 100%;
-  position: absolute;
-  left: 0;
-  top: 0;
-  cursor: pointer;
+  display: none;
 }
 
 .dropdown-toggle {
   position: absolute;
   top: 50%;
-  right:0.75rem;
+  right: 0.75rem;
   transform: translateY(-50%);
   display: flex;
   align-items: center;
-  pointer-events: none;
+  pointer-events: auto;
   z-index: 100;
-}
-
-.dropdown-icon {
-  font-size: 1rem;
 }
 </style>
