@@ -54,7 +54,6 @@ const updateDate = ({ target: { value } }) => {
   fill: $red !important;
 }
 
-
 .date-picker {
   margin: 0 auto;
   padding: 0.9375rem;
