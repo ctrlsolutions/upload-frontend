@@ -7,6 +7,9 @@
       </section>
       <section class="page"><About></About></section>
       <section class="page"><Summary></Summary></section>
+      <section class="page">
+        <BaseDateInput v-model="selectedDate" width="15rem" />
+      </section>
     </div>
 
     <div class="background">
