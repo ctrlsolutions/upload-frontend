@@ -6,19 +6,19 @@
     <!-- Scrollable container -->
     <div class="form-wrapper">
       <form class="signup-form">
-        <InputField id="email" type="email" placeholder="Email" variant = "red" width ="100%" />
-        <InputField id="password" type="password" placeholder="Password" variant="red" width="100%" />
-        <InputField id="re-password" type="password" placeholder="Re-enter password" variant="red" width="100%" />
+        <InputField id="email" type="text" placeholder="Email" variant = "red" width ="100%" />
+        <InputField id="password" type="text" placeholder="Password" variant="red" width="100%" />
+        <InputField id="re-password" type="text" placeholder="Re-enter password" variant="red" width="100%" />
 
         <!-- Red horizontal line -->
         <div class="separator"></div>
 
         <div class="name-fields">
-          <InputField id="First-name" type="First-name" placeholder="First name" variant = "red" width ="100%" />
-          <InputField id="Middle-name" type="Middle-name" placeholder="Middle name" variant="red" width="100%" />
+          <InputField id="first-name" type="text" placeholder="First name" variant = "red" width ="100%" />
+          <InputField id="middle-name" type="text" placeholder="Middle name" variant="red" width="100%" />
 
         </div>
-        <InputField id="Last-name" type="Last-name" placeholder="Last name" variant="red" width="100%" />
+        <InputField id="last-name" type="text" placeholder="Last name" variant="red" width="100%" />
 
         <!-- Sex Radio Buttons (Hidden until scrolled down) -->
         <div class="radio-group">
@@ -30,7 +30,12 @@
         <!-- Date of Birth Input -->
         <div class="dob-group">
           <label class="label">Date of Birth</label>
-          <input type="date" class="dob-input" />
+          <BaseDateInput 
+            v-model="selectedDate" 
+            width="15rem" 
+            :min="'2000-01-01'" 
+            :max="'2020-12-31'" 
+          />
         </div>
       </form>
     </div>
@@ -46,25 +51,32 @@
   </div>
 </template>
 
+
 <script setup>
 import { ref } from 'vue';
 import FormRadio from '@/components/Global/BaseFormRadio.vue';
 import InputField from '@/components/Global/BaseTextInput.vue';
 import FormButton from '@/components/Global/BaseFormButton.vue';
+import BaseDateInput from "@/components/Global/BaseDateInput.vue";
+
+const selectedDate = ref('')
 
 const selectedSex = ref('male');
-
 </script>
+
 
 <style lang="scss" scoped>
 
-/* Radio Button Group */
+.BaseDateInput {
+  margin-left: 100rem;
+}
+
 .radio-group {
     display: flex;
     align-items: center;
     gap: -0.5rem;
     margin: -0.5rem 0;
-  }
+}
   
 .signup-container {
   max-width: 25rem;
@@ -84,14 +96,13 @@ const selectedSex = ref('male');
 .form-wrapper {
   max-height: 19.5rem; 
   overflow-y: auto;
-  padding-right: 10px;
+  padding-right: 1rem;
   margin-bottom: -2rem;
-  margin-top: 1rem; 
-  // background-color: #6f6f6f;
+  margin-top: 2rem; 
 }
 
 .form-wrapper::-webkit-scrollbar {
-  width: 8px;
+  width: 0.5rem;
 }
 
 .form-wrapper::-webkit-scrollbar-track {
@@ -100,13 +111,8 @@ const selectedSex = ref('male');
 
 .form-wrapper::-webkit-scrollbar-thumb {
   background: rgba($red, 0.5);
-  border-radius: 4px; 
+  border-radius: 1rem; 
 }
-
-.form-wrapper::-webkit-scrollbar-thumb:hover {
-  background: $red;  
-}
-
 
 .signup-form {
   display: flex;
@@ -116,52 +122,31 @@ const selectedSex = ref('male');
 
 .label {
   text-align: left;
-  margin: 10px 5px;
+  margin: 0.5rem 1rem;
   color: #6f6f6f;
   font-weight: bold;
 }
 
-.input-field {
-  width: 100%;
-  padding: 12px;
-  margin: 6px 0;
-  border: 1px solid #800000;
-  border-radius: 20px; 
-  font-size: 1rem;
-}
-
-
 .separator {
   align-self: center;
   width: 95%;
-  height: 1px;
+  height: 0.1rem;
   background-color: #800000;
-  margin: 10px 0;
+  margin: 0.5rem 0;
+  opacity:50%;
 }
-
 
 .name-fields {
   display: flex;
-  gap: 10px;
+  gap: 0.5rem;
 }
-
 
 .dob-group {
   display: flex;
   align-items: center;
   justify-content: space-between;
-  margin: 10px 0;
+  margin: -1.5rem 0;
 }
-
-.dob-input {
-  width: 70%;
-  padding: 12px;
-  border: 1px solid #800000;
-  border-radius: 20px; 
-  font-size: 1rem;
-  color: #800000;
-}
-
 
 .button-group {
   display: flex;
@@ -170,44 +155,19 @@ const selectedSex = ref('male');
   position: sticky;
   bottom: 0;
   background: white;
-  padding: 10px 0;
-}
-
-.cancel-btn, .signup-btn, .google-btn {
-  flex: 1;
-  padding: 12px;
-  font-size: 1rem;
-  border: none;
-  border-radius: 25px;
-  cursor: pointer;
-}
-
-.cancel-btn {
-  background-color: black;
-  color: white;
-  margin-right: 5px;
-}
-
-.signup-btn {
-  background-color: #800000;
-  color: white;
-  margin-left: 5px;
+  padding: -1rem 0;
 }
 
 .or-text {
   margin: -0.2rem 0;
   font-weight: bold;
-}
-
-.google-btn {
-  background-color: #800000;
-  color: white;
-  width: 100%;
-  margin-top: 10px;
+  padding-top: 1rem;
+  padding-bottom: 0.5rem;
 }
 
 .subtitle{
   font-weight:800;
   color:#6f6f6f;
 }
+
 </style>
