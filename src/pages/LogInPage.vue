@@ -6,7 +6,7 @@
     <p>Welcome! Log in to access your dashboard.</p>
     <div class="input-group">
       <BaseTextInput id="email" type="email" placeholder="Email" variant="green" width="100%" height="3.5rem"/>
-      <BaseTextInput id="password" type="password" placeholder="Password" variant="green" width="100%" height="3.5rem"/>
+      <BaseTextInput id="password" type="password" placeholder="Password" variant="green" width="100%" height="3.5rem "/>
     </div>
     <div class="forgot-password">
       <a href="#" class="forgotp">Forgot Password?</a>
