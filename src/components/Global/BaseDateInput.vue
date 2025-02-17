@@ -19,6 +19,7 @@
 <script setup>
 import { ref } from 'vue'
 
+
 const inputRef = ref(null)
 
 const props = defineProps({
@@ -38,7 +39,6 @@ const openDatePicker = () => {
 
 
 <style lang="scss" scoped>
-
 
 .date-picker {
   margin: 0 auto;
@@ -67,6 +67,7 @@ const openDatePicker = () => {
   appearance: none;
   font-family: 'Inter', sans-serif;
   opacity: 70%;
+
 }
 
 .date-input:focus {
