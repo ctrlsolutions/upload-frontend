@@ -19,8 +19,6 @@
 <script setup>
 import { ref } from 'vue'
 
-defineOptions({ inheritAttrs: false })
-
 const inputRef = ref(null)
 
 const props = defineProps({

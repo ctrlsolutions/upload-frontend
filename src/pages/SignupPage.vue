@@ -3,14 +3,12 @@
     <h1 class="title">Sign up</h1>
     <p class="subtitle">New here? Create a new account below.</p>
 
-    <!-- Scrollable container -->
     <div class="form-wrapper">
       <form class="signup-form">
         <InputField id="email" type="text" placeholder="Email" variant = "red" width ="100%" />
         <InputField id="password" type="text" placeholder="Password" variant="red" width="100%" />
         <InputField id="re-password" type="text" placeholder="Re-enter password" variant="red" width="100%" />
 
-        <!-- Red horizontal line -->
         <div class="separator"></div>
 
         <div class="name-fields">
@@ -20,14 +18,12 @@
         </div>
         <InputField id="last-name" type="text" placeholder="Last name" variant="red" width="100%" />
 
-        <!-- Sex Radio Buttons (Hidden until scrolled down) -->
         <div class="radio-group">
           <label class="label">Sex</label>
           <FormRadio id="male" label="Male" v-model="selectedSex" />
           <FormRadio id="female" label="Female" v-model="selectedSex" />
         </div>
 
-        <!-- Date of Birth Input -->
         <div class="dob-group">
           <label class="label">Date of Birth</label>
           <BaseDateInput 
@@ -40,7 +36,6 @@
       </form>
     </div>
 
-    <!-- Fixed Buttons -->
     <div class="button-group">
       <FormButton variant="black" width="12rem">CANCEL</FormButton>
       <FormButton variant="red" width="12rem">SUBMIT</FormButton>
@@ -131,9 +126,9 @@ const selectedSex = ref('male');
   align-self: center;
   width: 95%;
   height: 0.1rem;
-  background-color: #800000;
+  background-color: $red;
   margin: 0.5rem 0;
-  opacity:50%;
+  opacity:80%;
 }
 
 .name-fields {
