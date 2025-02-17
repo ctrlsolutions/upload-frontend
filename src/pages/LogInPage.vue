@@ -4,22 +4,22 @@
       <h1>Log in</h1>
     </div>
     <p>Welcome! Log in to access your dashboard.</p>
-    <div class="input-group">
+    <form class="input-group">
       <BaseTextInput id="email" type="email" placeholder="Email" variant="green" width="100%" height="3.5rem"/>
       <BaseTextInput id="password" type="password" placeholder="Password" variant="green" width="100%" height="3.5rem "/>
-    </div>
-    <div class="forgot-password">
+    </form>
+    <form class="forgot-password">
       <a href="#" class="forgotp">Forgot Password?</a>
-    </div>
-    <div class="login-button">
+    </form>
+    <form class="login-button">
       <BaseFormButton variant="green" width="100%">LOG IN</BaseFormButton>
-    </div>
+    </form>
     <div class="or-text">
       <p>OR</p>
     </div>
-    <div class="cont-google">
+    <form class="cont-google">
       <BaseFormButton variant="red" width="100%"><v-icon name="fc-google" scale="1.2"></v-icon><span class="google">CONTINUE WITH GOOGLE</span></BaseFormButton>
-    </div>
+    </form>
   </div>
 </template>
 
