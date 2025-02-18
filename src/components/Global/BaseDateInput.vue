@@ -6,16 +6,19 @@
         type="date"
         class="date-input"
         v-bind="$attrs"
+        :value="modelValue"
+        @input="$emit('update:modelValue', $event.target.value)"
       />
-      <div class="dropdown-toggle" @click="openCalendar">
-        <font-awesome-icon :icon="['fas', 'calendar-alt']" style="color: #751113;" />
+      <div class="dropdown-toggle">
+        <v-icon name="fa-calendar-alt" class="dropdown-toggle" color= #751113 @click="openDatePicker"/>
       </div>
     </div>
   </div>
 </template>
 
 <script setup>
-import { ref, computed } from 'vue'
+import { ref } from 'vue'
+
 
 const inputRef = ref(null)
 
@@ -23,9 +26,17 @@ const props = defineProps({
   width: {
     type: String,
     default: '12.5rem'
-  }
+  },
+  modelValue: String
 })
+
+defineEmits(['update:modelValue'])
+
+const openDatePicker = () => {
+  inputRef.value?.showPicker?.() || inputRef.value?.focus()
+}
 </script>
+
 
 <style lang="scss" scoped>
 
@@ -55,6 +66,8 @@ const props = defineProps({
   -moz-appearance: none;
   appearance: none;
   font-family: 'Inter', sans-serif;
+  opacity: 70%;
+
 }
 
 .date-input:focus {
