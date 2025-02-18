@@ -5,11 +5,35 @@
     </div>
     <p>Welcome! Log in to access your dashboard.</p>
     <div class="input-group">
-      <BaseTextInput id="email" type="email" placeholder="Email" variant="green" width="100%" height="3.5rem" v-model="form.email" @input="clearError('email')"/>
-      <p v-if="hasAttemptedSubmit && errors.email" class="error-message">{{ errors.email }}</p>
-      <BaseTextInput id="password" type="password" placeholder="Password" variant="green" width="100%" height="3.5rem" v-model="form.password" @input="clearError('password')"/>
-      <p v-if="hasAttemptedSubmit && errors.password" class="error-message">{{ errors.password }}</p>
+      <BaseTextInput
+        name="email"
+        type="email"
+        placeholder="Email"
+        variant="green"
+        width="100%"
+        height="3.5rem"
+        v-model="form.email"
+        @input="clearError('email')"
+      />
+      <p v-if="hasAttemptedSubmit && errors.email" class="error-message">
+        {{ errors.email }}
+      </p>
+
+      <BaseTextInput
+        name="password"
+        type="password"
+        placeholder="Password"
+        variant="green"
+        width="100%"
+        height="3.5rem"
+        v-model="form.password"
+        @input="clearError('password')"
+      />
+      <p v-if="hasAttemptedSubmit && errors.password" class="error-message">
+        {{ errors.password }}
+      </p>
     </div>
+
     <div class="forgot-password">
       <a href="#" class="forgotp">Forgot Password?</a>
     </div>
@@ -70,7 +94,7 @@ export default {
       if (!errors.email && !errors.password) {
         console.log("Form submitted successfully!", form);
       }
-      
+
     };
 
     const clearError = (field) => {
@@ -83,7 +107,7 @@ export default {
       hasAttemptedSubmit,
       validateForm,
       clearError,
-    }; 
+    };
   }
 };
 </script>
@@ -199,9 +223,9 @@ export default {
 }
 
 .forgot-password {
-  width: 100%;     
-  text-align: right;   
-  margin-top: -0.5rem; 
+  width: 100%;
+  text-align: right;
+  margin-top: -0.5rem;
   padding-right: 1rem;
   margin-bottom: 1.5rem;
 
