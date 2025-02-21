@@ -10,7 +10,7 @@
         @input="$emit('update:modelValue', $event.target.value)"
       />
       <div class="dropdown-toggle">
-        <v-icon name="bi-calendar" class="dropdown-toggle" :color="'#751113'" @click="openDatePicker"/>
+        <v-icon name="bi-calendar" class="dropdown-toggle" @click="openDatePicker"/>
       </div>
     </div>
   </div>
@@ -88,6 +88,7 @@ const openDatePicker = () => {
   cursor: pointer;
   opacity: 0.8;
   transition: opacity 0.3s ease;
+  color: $red;
 }
 
 .dropdown-toggle:hover {
