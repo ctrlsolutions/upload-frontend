@@ -6,7 +6,7 @@
     <p>Welcome! Log in to access your dashboard.</p>
     <form class="input-group">
       <BaseTextInput id="email" type="email" placeholder="Email" variant="green" width="100%" height="3.5rem"/>
-      <BaseTextInput id="password" type="password" placeholder="Password" variant="green" width="100%" height="3.5rem "/>
+      <BaseTextInput id="password" type="password" placeholder="Password" variant="green" width="100%" height="3.5rem"/>
     </form>
     <form class="forgot-password">
       <a href="#" class="forgotp">Forgot Password?</a>
@@ -17,20 +17,39 @@
     <div class="or-text">
       <p>OR</p>
     </div>
-    <form class="cont-google">
-      <BaseFormButton variant="red" width="100%"><v-icon name="fc-google" scale="1.2"></v-icon><span class="google">CONTINUE WITH GOOGLE</span></BaseFormButton>
-    </form>
+    <div class="cont-google">
+      <BaseFormButton variant="red" width="100%" @click="openGoogleModal">
+        <v-icon name="fc-google" scale="1.2"></v-icon>
+        <span class="google">CONTINUE WITH GOOGLE</span>
+      </BaseFormButton>
+    </div>
+
+    <ModalLogin
+      :isOpen="isGoogleModalOpen"
+      @close="closeGoogleModal"
+      @proceed="handleGoogleLogin"
+    />
   </div>
 </template>
 
-<script>
+<script setup lang="ts">
+import { ref } from 'vue';
 import BaseTextInput from "@/components/Global/BaseTextInput.vue";
 import BaseFormButton from "@/components/Global/BaseFormButton.vue";
-export default {
-  components: {
-    BaseTextInput,
-    BaseFormButton,
-  },
+import ModalLogin from '@/components/Login/ModalLogin.vue';
+
+const isGoogleModalOpen = ref(false);
+
+const openGoogleModal = () => {
+  isGoogleModalOpen.value = true;
+};
+
+const closeGoogleModal = () => {
+  isGoogleModalOpen.value = false;
+};
+
+const handleGoogleLogin = (password: string) => {
+  console.log('Proceeding with Google login, password:', password);
 };
 </script>
 
@@ -116,6 +135,7 @@ export default {
 }
 
 .or-text {
+  margin-top: 1.5rem;
   margin-bottom: 1rem;
 
   @include sm {
