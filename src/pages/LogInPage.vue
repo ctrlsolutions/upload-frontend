@@ -1,18 +1,18 @@
 <template>
-  <div class="login-container">
+  <form class="login-container" v-on:submit.prevent="loginUser">
     <div class="login-header">
       <h1>Log in</h1>
     </div>
     <p>Welcome! Log in to access your dashboard.</p>
     <div class="input-group">
-      <BaseTextInput id="email" type="email" placeholder="Email" variant="green" width="100%" height="3.5rem"/>
-      <BaseTextInput id="password" type="password" placeholder="Password" variant="green" width="100%" height="3.5rem"/>
+      <BaseTextInput :value="userData.email" @input="updateEmail" id="email" type="email" placeholder="Email" variant="green" width="100%" height="3.5rem"/>
+      <BaseTextInput :value="userData.password" @input="updatePassword" id="password" type="password" placeholder="Password" v-model="password" variant="green" width="100%" height="3.5rem"/>
     </div>
     <div class="forgot-password">
       <a href="#" class="forgotp">Forgot Password?</a>
     </div>
     <div class="login-button">
-      <BaseFormButton variant="green" width="100%">LOG IN</BaseFormButton>
+      <BaseFormButton variant="green" width="100%" :click="loginUser">LOG IN</BaseFormButton>
     </div>
     <div class="or-text">
       <p>OR</p>
@@ -20,21 +20,49 @@
     <div class="cont-google">
       <BaseFormButton variant="red" width="100%"><v-icon name="fc-google" scale="1.2"></v-icon><span class="google">CONTINUE WITH GOOGLE</span></BaseFormButton>
     </div>
-  </div>
+  </form>
 </template>
 
-<script>
+<script setup>
 import BaseTextInput from "@/components/Global/BaseTextInput.vue";
 import BaseFormButton from "@/components/Global/BaseFormButton.vue";
-export default {
-  components: {
-    BaseTextInput,
-    BaseFormButton,
-  },
+import { ref } from "vue";
+import axios from 'axios';
+
+const userData = ref({
+  email: "",
+  password: "",
+});
+
+const updateEmail = (e) => {
+  userData.value.email = e.target.value;
 };
+const updatePassword = (e) => {
+  userData.value.password = e.target.value;
+};
+
+const loginUser = async () => {
+  console.log(userData.value.email);
+  console.log(userData.value.password);
+
+  try {
+    const response = await axios.post('http://127.0.0.1:8000/api/user/login/', userData.value,);
+    console.log(response);
+  } catch (error) {
+    console.error(error);
+  }
+};
+
+  
 </script>
 
 <style lang="scss" scoped>
+.error-message {
+  color: red;
+  text-align: center;
+  margin-top: 10px;
+}
+
 .login-container {
   display: flex;
   flex-direction: column;
