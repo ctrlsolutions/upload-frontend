@@ -4,45 +4,41 @@
     <p class="subtitle">New here? Create a new account below.</p>
 
     <div class="form-wrapper">
-      <form class="signup-form">
-        <InputField id="email" type="text" placeholder="Email" variant = "red" width ="100%" />
-        <InputField id="password" type="text" placeholder="Password" variant="red" width="100%" />
-        <InputField id="re-password" type="text" placeholder="Re-enter password" variant="red" width="100%" />
+      <form class="signup-form" @submit.prevent="handleSubmit">
+        <InputField id="email" v-model="formData.email" type="text" placeholder="Email" variant="red" width="100%" />
+        <InputField id="password" v-model="formData.password" type="password" placeholder="Password" variant="red" width="100%" />
+        <InputField id="re-password" v-model="formData.rePassword" type="password" placeholder="Re-enter password" variant="red" width="100%" />
 
         <div class="separator"></div>
 
         <div class="name-fields">
-          <InputField id="first-name" type="text" placeholder="First name" variant = "red" width ="100%" />
-          <InputField id="middle-name" type="text" placeholder="Middle name" variant="red" width="100%" />
-
+          <InputField id="first-name" v-model="formData.firstName" type="text" placeholder="First name" variant="red" width="100%" />
+          <InputField id="middle-name" v-model="formData.middleName" type="text" placeholder="Middle name" variant="red" width="100%" />
         </div>
-        <InputField id="last-name" type="text" placeholder="Last name" variant="red" width="100%" />
+        <InputField id="last-name" v-model="formData.lastName" type="text" placeholder="Last name" variant="red" width="100%" />
 
         <div class="radio-group">
           <label class="label">Sex</label>
-          <FormRadio id="male" label="Male" v-model="selectedSex" />
-          <FormRadio id="female" label="Female" v-model="selectedSex" />
+          <FormRadio id="male" label="Male" v-model="formData.sex" />
+          <FormRadio id="female" label="Female" v-model="formData.sex" />
         </div>
 
         <div class="dob-group">
           <label class="label">Date of Birth</label>
-          <BaseDateInput 
-            v-model="selectedDate" 
-            width="15rem" 
-            :min="'2000-01-01'" 
-            :max="'2020-12-31'" 
-          />
+          <BaseDateInput v-model="formData.dob" width="15rem" :min="'2000-01-01'" :max="'2020-12-31'" />
         </div>
       </form>
     </div>
 
     <div class="button-group">
       <FormButton variant="black" width="12rem">CANCEL</FormButton>
-      <FormButton variant="red" width="12rem">SUBMIT</FormButton>
+      <FormButton variant="red" width="12rem" @click="handleSubmit">SUBMIT</FormButton>
     </div>
 
     <p class="or-text">OR</p>
     <FormButton variant="red" width="25rem">CONTINUE WITH GOOGLE</FormButton>
+
+    <ConfirmationModal v-if="showModal" :formData="formData" @close="showModal = false" />
   </div>
 </template>
 
@@ -53,10 +49,27 @@ import FormRadio from '@/components/Global/BaseFormRadio.vue';
 import InputField from '@/components/Global/BaseTextInput.vue';
 import FormButton from '@/components/Global/BaseFormButton.vue';
 import BaseDateInput from "@/components/Global/BaseDateInput.vue";
+import ConfirmationModal from "@/components/SignUp/ConfirmationModal.vue";
 
-const selectedDate = ref('')
+// const selectedDate = ref('')
 
-const selectedSex = ref('male');
+const showModal = ref(false);
+
+const formData = ref({
+  email: '',
+  password: '',
+  rePassword: '',
+  firstName: '',
+  middleName: '',
+  lastName: '',
+  sex: 'Male',
+  dob: '',
+});
+
+const handleSubmit = () => {
+  showModal.value = true;
+};
+
 </script>
 
 
@@ -72,7 +85,7 @@ const selectedSex = ref('male');
     gap: -0.5rem;
     margin: -0.5rem 0;
 }
-  
+
 .signup-container {
   max-width: 25rem;
   margin: auto;
@@ -89,11 +102,11 @@ const selectedSex = ref('male');
 }
 
 .form-wrapper {
-  max-height: 19.5rem; 
+  max-height: 19.5rem;
   overflow-y: auto;
   padding-right: 1rem;
   margin-bottom: -2rem;
-  margin-top: 2rem; 
+  margin-top: 2rem;
 }
 
 .form-wrapper::-webkit-scrollbar {
@@ -106,7 +119,7 @@ const selectedSex = ref('male');
 
 .form-wrapper::-webkit-scrollbar-thumb {
   background: rgba($red, 0.5);
-  border-radius: 1rem; 
+  border-radius: 1rem;
 }
 
 .signup-form {
