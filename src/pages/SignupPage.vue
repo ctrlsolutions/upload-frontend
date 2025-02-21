@@ -5,9 +5,9 @@
 
     <div class="form-wrapper">
       <div class="signup-form">
-        <InputField :value="userData.email" @input="updateEmail" id="email" type="email" placeholder="Email" variant = "red" width ="100%" />
-        <InputField :value="userData.password1" @input="updatePassword1" id="password" type="password" placeholder="Password" variant="red" width="100%" />
-        <InputField :value="userData.password2" @input="updatePassword2" type="password" placeholder="Re-enter password" variant="red" width="100%" />
+        <InputField v-model ="userData.email" id="email" type="email" placeholder="Email" variant = "red" width ="100%" />
+        <InputField v-model ="userData.password1" @input="updatePassword" id="password" type="password" placeholder="Password" variant="red" width="100%" />
+        <InputField v-model ="userData.password2" @input="updatePassword2" type="password" placeholder="Re-enter password" variant="red" width="100%" />
 
         <div class="separator"></div>
 
