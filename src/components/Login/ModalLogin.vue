@@ -1,36 +1,3 @@
-<script setup lang="ts">
-import { ref } from 'vue';
-import BaseTextInput from "@/components/Global/BaseTextInput.vue";
-import BaseFormButton from "@/components/Global/BaseFormButton.vue";
-
-const props = defineProps<{
-  isOpen: boolean
-}>();
-
-const emit = defineEmits<{
-  (e: 'close'): void
-  (e: 'proceed', password: string): void
-}>();
-
-const password = ref('');
-const confirmPassword = ref('');
-
-const closeModal = () => {
-  emit('close');
-  password.value = '';
-  confirmPassword.value = '';
-};
-
-const handleSubmit = () => {
-  if (password.value !== confirmPassword.value) {
-    alert('Passwords do not match');
-    return;
-  }
-  emit('proceed', password.value);
-  closeModal();
-};
-</script>
-
 <template>
   <Teleport to="body">
     <Transition name="modal-fade">
@@ -86,6 +53,39 @@ const handleSubmit = () => {
     </Transition>
   </Teleport>
 </template>
+
+<script setup lang="ts">
+import { ref } from 'vue';
+import BaseTextInput from "@/components/Global/BaseTextInput.vue";
+import BaseFormButton from "@/components/Global/BaseFormButton.vue";
+
+const props = defineProps<{
+  isOpen: boolean
+}>();
+
+const emit = defineEmits<{
+  (e: 'close'): void
+  (e: 'proceed', password: string): void
+}>();
+
+const password = ref('');
+const confirmPassword = ref('');
+
+const closeModal = () => {
+  emit('close');
+  password.value = '';
+  confirmPassword.value = '';
+};
+
+const handleSubmit = () => {
+  if (password.value !== confirmPassword.value) {
+    alert('Passwords do not match');
+    return;
+  }
+  emit('proceed', password.value);
+  closeModal();
+};
+</script>
 
 <style lang="scss" scoped>
 .modal-overlay {
